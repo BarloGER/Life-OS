@@ -66,7 +66,7 @@ export class User {
     isRecoveryEmailVerified: boolean,
     isPhoneNumberVerified: boolean
   ): User {
-    return new User(
+    return {
       id,
       role,
       status,
@@ -97,7 +97,7 @@ export class User {
       updatedAt,
       isEmailVerified,
       isRecoveryEmailVerified,
-      isPhoneNumberVerified
-    );
+      isPhoneNumberVerified,
+    };
   }
 }
