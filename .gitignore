@@ -8,6 +8,11 @@ out-tsc
 # dependencies
 node_modules
 
+# Environment variables
+# Ignore all files that start with "env" except those ending with ".encrypted"
+.env*
+!*.encrypted
+
 # IDEs and editors
 /.idea
 .project

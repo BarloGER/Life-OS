@@ -7,7 +7,16 @@
     "baseUrl": "./src",
     "paths": {
       "@shared/entities/*": ["./shared/entities/*"],
-      "@shared/frameworks/*": ["./shared/frameworks/*"]
+      "@shared/frameworks/*": ["./shared/frameworks/*"],
+      "@shared/services/*": ["./shared/services/*"],
+      "@shared/utils/*": ["./shared/utils/*"],
+
+      "@features/authentication/interface-adapters/*": [
+        "./features/authentication/interface-adapters/*"
+      ],
+      "@features/authentication/use-cases/*": [
+        "./features/authentication/use-cases/*"
+      ]
     }
   },
   "include": ["src/**/*.ts"],
