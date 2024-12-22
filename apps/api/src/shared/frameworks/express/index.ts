@@ -1,5 +1,6 @@
 import express, { Express, Request, Response } from 'express';
 import cors, { CorsOptions } from 'cors';
+import { sessionConfig } from '../express-session';
 import { AppDependencies } from 'main';
 import { createAuthenticationRouter } from './routes/authenticationRouter';
 
@@ -13,6 +14,7 @@ export function initializeServer(dependencies: AppDependencies) {
   app.use(cors(corsOptions));
   app.use(express.json({ limit: '5mb' }));
   app.use(express.urlencoded({ extended: true }));
+  app.use(sessionConfig);
 
   app.get('/', (req: Request, res: Response) => {
     res.send('<h1>Welcome to LifeOS api</h1>');

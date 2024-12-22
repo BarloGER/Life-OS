@@ -7,3 +7,9 @@ export {
   TPublicRegisterResponseModel,
 } from './register/TPublicRegisterModels';
 export { PublicRegisterUsecase } from './register/PublicRegisterUsecase';
+
+export {
+  TPublicLoginRequestModel,
+  TPublicLoginResponseModel,
+} from './login/TPublicLoginModels';
+export { PublicLoginUsecase } from './login/PublicLoginUsecase';

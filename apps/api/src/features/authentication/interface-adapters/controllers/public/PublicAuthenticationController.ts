@@ -1,10 +1,15 @@
 import {
   PublicRegisterUsecase,
   TPublicRegisterRequestModel,
+  PublicLoginUsecase,
+  TPublicLoginRequestModel,
 } from '@features/authentication/use-cases/public';
 
 export class PublicAuthenticationController {
-  constructor(private readonly interactor: PublicRegisterUsecase) {}
+  constructor(
+    private readonly registerInteractor: PublicRegisterUsecase,
+    private readonly loginInteractor: PublicLoginUsecase
+  ) {}
 
   async handleRegistrationRequest(
     rawData: TPublicRegisterRequestModel
@@ -20,6 +25,17 @@ export class PublicAuthenticationController {
       isTermsAccepted,
     };
 
-    await this.interactor.registerUser(requestModel);
+    await this.registerInteractor.registerUser(requestModel);
+  }
+
+  async handleLoginRequest(rawData: TPublicLoginRequestModel): Promise<void> {
+    const { email, password } = rawData;
+
+    const requestModel: TPublicLoginRequestModel = {
+      email,
+      password,
+    };
+
+    await this.loginInteractor.loginUser(requestModel);
   }
 }
