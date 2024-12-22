@@ -1,7 +1,9 @@
 import express, { Express, Request, Response } from 'express';
 import cors, { CorsOptions } from 'cors';
+import { AppDependencies } from 'main';
+import { createAuthenticationRouter } from './routes/authenticationRouter';
 
-export const initializeServer = (dependencies) => {
+export function initializeServer(dependencies: AppDependencies) {
   const app: Express = express();
   const PORT = process.env.PORT || 8080;
   const corsOptions: CorsOptions = {
@@ -16,6 +18,9 @@ export const initializeServer = (dependencies) => {
     res.send('<h1>Welcome to LifeOS api</h1>');
   });
 
+  const authenticationRouter = createAuthenticationRouter(dependencies);
+  app.use('/auth', authenticationRouter);
+
   app.use('*', (req: Request, res: Response) => {
     res.send('<h1>404! Page not found!</h1>');
   });
@@ -23,4 +28,4 @@ export const initializeServer = (dependencies) => {
   app.listen(PORT, () => {
     console.log(`[server]: Server is running on port: ${PORT}`);
   });
-};
+}
