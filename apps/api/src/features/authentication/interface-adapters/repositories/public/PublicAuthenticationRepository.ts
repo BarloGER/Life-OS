@@ -246,4 +246,13 @@ export class PublicAuthenticationRepository
     const query = `UPDATE users SET email_verification_token = $1, email_verification_token_expires_at = $2 WHERE id = $3`;
     await this.dbClient.query(query, [token, expiresAt, userId]);
   }
+
+  async updatePasswordResetToken(
+    userId: string,
+    token: string,
+    expiresAt: Date
+  ): Promise<void> {
+    const query = `UPDATE users SET password_reset_token = $1, password_reset_token_expires_at = $2 WHERE id = $3`;
+    await this.dbClient.query(query, [token, expiresAt, userId]);
+  }
 }

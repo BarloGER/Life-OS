@@ -28,4 +28,10 @@ export interface IPublicAuthenticationRepository {
     token: string,
     expiresAt: Date
   ): Promise<void>;
+
+  updatePasswordResetToken(
+    userId: string,
+    token: string,
+    expiresAt: Date
+  ): Promise<void>;
 }

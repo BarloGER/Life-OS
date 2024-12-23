@@ -1,4 +1,3 @@
-export { IPublicAuthenticationInputPort } from './IPublicAuthenticationInputPort';
 export { IPublicAuthenticationOutputPort } from './IPublicAuthenticationOutputPort';
 export { IPublicAuthenticationRepository } from './IPublicAuthenticationRepository';
 
@@ -29,3 +28,10 @@ export {
 } from './resend-email-verification/TPublicResendEmailVerificationModels';
 export { IPublicResendEmailVerificationInputPort } from './resend-email-verification/IPublicResendEmailVerificationInputPort';
 export { PublicResendEmailVerificationUsecase } from './resend-email-verification/PublicResendEmailVerificationUsecase';
+
+export {
+  TPublicRequestPasswordResetRequestModel,
+  TPublicRequestPasswordResetResponseModel,
+} from './request-password-reset/TPublicRequestPasswordResetModels';
+export { IPublicRequestPasswordResetInputPort } from './request-password-reset/IPublicRequestPasswordResetInputPort';
+export { PublicRequestPasswordResetUsecase } from './request-password-reset/PublicRequestPasswordResetUsecase';

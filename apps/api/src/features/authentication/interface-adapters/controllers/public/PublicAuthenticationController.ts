@@ -7,6 +7,8 @@ import {
   TPublicVerifyEmailRequestModel,
   IPublicResendEmailVerificationInputPort,
   TPublicResendEmailVerificationRequestModel,
+  IPublicRequestPasswordResetInputPort,
+  TPublicRequestPasswordResetRequestModel,
 } from '@features/authentication/use-cases/public';
 
 export class PublicAuthenticationController {
@@ -14,7 +16,8 @@ export class PublicAuthenticationController {
     private readonly registerInteractor: IPublicRegisterInputPort,
     private readonly loginInteractor: IPublicLoginInputPort,
     private readonly verifyEmailInteractor: IPublicVerifyEmailInputPort,
-    private readonly resendEmailVerificationInteractor: IPublicResendEmailVerificationInputPort
+    private readonly resendEmailVerificationInteractor: IPublicResendEmailVerificationInputPort,
+    private readonly requestPasswordResetInteractor: IPublicRequestPasswordResetInputPort
   ) {}
 
   async handleRegistrationRequest(
@@ -68,6 +71,20 @@ export class PublicAuthenticationController {
     };
 
     await this.resendEmailVerificationInteractor.resendEmailVerification(
+      requestModel
+    );
+  }
+
+  async handleRequestPasswordResetRequest(
+    rawData: TPublicRequestPasswordResetRequestModel
+  ): Promise<void> {
+    const { email } = rawData;
+
+    const requestModel: TPublicRequestPasswordResetRequestModel = {
+      email,
+    };
+
+    await this.requestPasswordResetInteractor.requestPasswordReset(
       requestModel
     );
   }
