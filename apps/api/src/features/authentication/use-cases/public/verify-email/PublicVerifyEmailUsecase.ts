@@ -1,10 +1,11 @@
 import { Token, User } from '@shared/entities/index';
 
+import { IPublicVerifyEmailInputPort } from './IPublicVerifyEmailInputPort';
 import { TPublicVerifyEmailRequestModel } from './TPublicVerifyEmailModels';
 import { IPublicAuthenticationOutputPort } from '../IPublicAuthenticationOutputPort';
 import { IPublicAuthenticationRepository } from '../IPublicAuthenticationRepository';
 
-export class PublicVerifyEmailUsecase {
+export class PublicVerifyEmailUsecase implements IPublicVerifyEmailInputPort {
   constructor(
     private readonly repository: IPublicAuthenticationRepository,
     private readonly outputPort: IPublicAuthenticationOutputPort

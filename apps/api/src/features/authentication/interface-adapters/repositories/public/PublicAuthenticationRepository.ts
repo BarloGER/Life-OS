@@ -237,4 +237,13 @@ export class PublicAuthenticationRepository
       throw new Error('authentication.verifyEmail.errors.unknownError');
     }
   }
+
+  async updateEmailVerificationToken(
+    userId: string,
+    token: string,
+    expiresAt: Date
+  ): Promise<void> {
+    const query = `UPDATE users SET email_verification_token = $1, email_verification_token_expires_at = $2 WHERE id = $3`;
+    await this.dbClient.query(query, [token, expiresAt, userId]);
+  }
 }

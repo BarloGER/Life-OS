@@ -3,6 +3,7 @@ import {
   TPublicRegisterResponseModel,
   TPublicLoginResponseModel,
   TPublicVerifyEmailResponseModel,
+  TPublicResendEmailVerificationResponseModel,
 } from '@features/authentication/use-cases/public';
 
 export class PublicAuthenticationPresenter
@@ -11,6 +12,8 @@ export class PublicAuthenticationPresenter
   private registrationResult: TPublicRegisterResponseModel | null = null;
   private loginResult: TPublicLoginResponseModel | null = null;
   private verifyEmailResult: TPublicVerifyEmailResponseModel | null = null;
+  private resendEmailVerificationResult: TPublicVerifyEmailResponseModel | null =
+    null;
 
   presentRegistrationResult(responseModel: TPublicRegisterResponseModel) {
     this.registrationResult = {
@@ -48,5 +51,19 @@ export class PublicAuthenticationPresenter
 
   getVerifyEmailResult() {
     return this.verifyEmailResult;
+  }
+
+  presentResendEmailVerificationResult(
+    responseModel: TPublicResendEmailVerificationResponseModel
+  ) {
+    this.resendEmailVerificationResult = {
+      success: responseModel.success,
+      internalMessage: responseModel.internalMessage,
+      errorCode: responseModel.errorCode,
+    };
+  }
+
+  getResendEmailVerificationResult() {
+    return this.resendEmailVerificationResult;
   }
 }

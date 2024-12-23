@@ -22,4 +22,10 @@ export interface IPublicAuthenticationRepository {
 
   findUserByEmailVerificationToken(token: string): Promise<User>;
   activateUserAccount(userId: string): Promise<void>;
+
+  updateEmailVerificationToken(
+    userId: string,
+    token: string,
+    expiresAt: Date
+  ): Promise<void>;
 }

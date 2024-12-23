@@ -3,11 +3,12 @@ import { IPasswordHasher, ITokenGenerator } from '@shared/utils/index';
 
 import { Email, Password, User } from '@shared/entities/index';
 
+import { IPublicLoginInputPort } from './IPublicLoginInputPort';
 import { TPublicLoginRequestModel } from './TPublicLoginModels';
 import { IPublicAuthenticationOutputPort } from '../IPublicAuthenticationOutputPort';
 import { IPublicAuthenticationRepository } from '../IPublicAuthenticationRepository';
 
-export class PublicLoginUsecase {
+export class PublicLoginUsecase implements IPublicLoginInputPort {
   constructor(
     private readonly notificationService: INotificationService,
     private readonly passwordHasher: IPasswordHasher,

@@ -6,6 +6,7 @@ import {
   PublicLoginUsecase,
   PublicRegisterUsecase,
   PublicVerifyEmailUsecase,
+  PublicResendEmailVerificationUsecase,
 } from '@features/authentication/use-cases/public';
 import { User } from '@shared/entities/User';
 import { NotificationService } from '@shared/services/index';
@@ -49,10 +50,20 @@ export function createAuthenticationRouter(
     publicAuthenticationPresenter
   );
 
+  const publicResendEmailVerificationUsecase =
+    new PublicResendEmailVerificationUsecase(
+      deps.notificationService,
+      deps.passwordHasher,
+      deps.tokenGenerator,
+      publicAuthenitcationRepository,
+      publicAuthenticationPresenter
+    );
+
   const publicAuthenticationController = new PublicAuthenticationController(
     publicRegisterUsecase,
     publicLoginUsecase,
-    publicVerifyEmailUsecase
+    publicVerifyEmailUsecase,
+    publicResendEmailVerificationUsecase
   );
 
   const router = Router();
@@ -189,6 +200,51 @@ export function createAuthenticationRouter(
 
         res.status(200).json(successResponse);
       } catch (error) {
+        next(error);
+      }
+    }
+  );
+
+  router.post(
+    '/public/resend-email-verification',
+    async (req: Request, res: Response, next: NextFunction) => {
+      type TResendEmailVerificationClientResponse = {
+        success: boolean;
+        errorCode?: string;
+      };
+
+      try {
+        await publicAuthenticationController.handleResendEmailVerificationRequest(
+          req.body
+        );
+
+        const response =
+          publicAuthenticationPresenter.getResendEmailVerificationResult();
+
+        if (!response) {
+          res.status(500).json({
+            success: false,
+            errorCode: 'authentication.errors.internalServerError',
+          });
+          return;
+        }
+
+        if (!response.success) {
+          const errorResponse: TResendEmailVerificationClientResponse = {
+            success: response.success,
+            errorCode: response.errorCode || undefined,
+          };
+          res.status(400).json(errorResponse);
+          return;
+        }
+
+        const successResponse: TResendEmailVerificationClientResponse = {
+          success: response.success,
+        };
+
+        res.status(200).json(successResponse);
+      } catch (error) {
+        console.log('Router error', error);
         next(error);
       }
     }

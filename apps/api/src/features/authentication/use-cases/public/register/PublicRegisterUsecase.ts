@@ -11,11 +11,12 @@ import {
   User,
 } from '@shared/entities/index';
 
+import { IPublicRegisterInputPort } from './IPublicRegisterInputPort';
 import { TPublicRegisterRequestModel } from './TPublicRegisterModels';
 import { IPublicAuthenticationOutputPort } from '../IPublicAuthenticationOutputPort';
 import { IPublicAuthenticationRepository } from '../IPublicAuthenticationRepository';
 
-export class PublicRegisterUsecase {
+export class PublicRegisterUsecase implements IPublicRegisterInputPort {
   constructor(
     private readonly notificationService: INotificationService,
     private readonly passwordHasher: IPasswordHasher,
