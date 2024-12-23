@@ -3,12 +3,15 @@ import {
   TPublicRegisterRequestModel,
   PublicLoginUsecase,
   TPublicLoginRequestModel,
+  PublicVerifyEmailUsecase,
+  TPublicVerifyEmailRequestModel,
 } from '@features/authentication/use-cases/public';
 
 export class PublicAuthenticationController {
   constructor(
     private readonly registerInteractor: PublicRegisterUsecase,
-    private readonly loginInteractor: PublicLoginUsecase
+    private readonly loginInteractor: PublicLoginUsecase,
+    private readonly verifyEmailInteractor: PublicVerifyEmailUsecase
   ) {}
 
   async handleRegistrationRequest(
@@ -37,5 +40,17 @@ export class PublicAuthenticationController {
     };
 
     await this.loginInteractor.loginUser(requestModel);
+  }
+
+  async handleVerifyEmailRequest(
+    rawData: TPublicVerifyEmailRequestModel
+  ): Promise<void> {
+    const { token } = rawData;
+
+    const requestModel: TPublicVerifyEmailRequestModel = {
+      token,
+    };
+
+    await this.verifyEmailInteractor.verifyEmail(requestModel);
   }
 }

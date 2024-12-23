@@ -13,3 +13,9 @@ export {
   TPublicLoginResponseModel,
 } from './login/TPublicLoginModels';
 export { PublicLoginUsecase } from './login/PublicLoginUsecase';
+
+export {
+  TPublicVerifyEmailRequestModel,
+  TPublicVerifyEmailResponseModel,
+} from './verify-email/TPublicVerifyEmailModels';
+export { PublicVerifyEmailUsecase } from './verify-email/PublicVerifyEmailUsecase';

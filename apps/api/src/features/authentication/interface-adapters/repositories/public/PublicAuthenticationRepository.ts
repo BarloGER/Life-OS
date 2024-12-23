@@ -196,4 +196,45 @@ export class PublicAuthenticationRepository
     const query = `UPDATE users SET locked_until = $1 WHERE id = $2`;
     await this.dbClient.query(query, [lockedUntil, userId]);
   }
+
+  async findUserByEmailVerificationToken(token: string): Promise<User> {
+    try {
+      const query = `SELECT * FROM users WHERE email_verification_token = $1`;
+      const values = [token];
+
+      const result = await this.dbClient.query(query, values);
+      if (result.rows.length === 0) {
+        throw new Error('authentication.verifyEmail.tokenDoesntExist');
+      }
+      const row = result.rows[0];
+
+      return this.mapRowToUser(row);
+    } catch (error) {
+      if (error.message) {
+        throw new Error('authentication.verifyEmail.errors.unknownError');
+      }
+
+      throw new Error('authentication.verifyEmail.errors.unknownError');
+    }
+  }
+
+  async activateUserAccount(userId: string): Promise<void> {
+    try {
+      const query = `UPDATE users
+                 SET status = 'active',
+                     is_email_verified = true,
+                     email_failed_verification_attempts = 0,
+                     email_verification_token = null,
+                     email_verification_token_expires_at = null
+                     WHERE id = $1`;
+
+      await this.dbClient.query(query, [userId]);
+    } catch (error) {
+      if (error.message) {
+        throw new Error('authentication.verifyEmail.errors.unknownError');
+      }
+
+      throw new Error('authentication.verifyEmail.errors.unknownError');
+    }
+  }
 }

@@ -19,4 +19,7 @@ export interface IPublicAuthenticationRepository {
 
   lockUserAccount(userId: string, durationInMinutes: number): Promise<void>;
   unlockUserAccount(userId: string): Promise<void>;
+
+  findUserByEmailVerificationToken(token: string): Promise<User>;
+  activateUserAccount(userId: string): Promise<void>;
 }
