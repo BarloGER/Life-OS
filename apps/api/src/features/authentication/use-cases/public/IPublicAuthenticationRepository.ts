@@ -34,4 +34,8 @@ export interface IPublicAuthenticationRepository {
     token: string,
     expiresAt: Date
   ): Promise<void>;
+
+  findUserByPasswordResetToken(token: string): Promise<User>;
+  updateUserPassword(userId: string, hashedPassword: string): Promise<void>;
+  clearPasswordResetToken(userId: string): Promise<void>;
 }

@@ -255,4 +255,38 @@ export class PublicAuthenticationRepository
     const query = `UPDATE users SET password_reset_token = $1, password_reset_token_expires_at = $2 WHERE id = $3`;
     await this.dbClient.query(query, [token, expiresAt, userId]);
   }
+
+  async findUserByPasswordResetToken(token: string): Promise<User> {
+    try {
+      const query = `SELECT * FROM users WHERE password_reset_token = $1`;
+      const values = [token];
+
+      const result = await this.dbClient.query(query, values);
+      if (result.rows.length === 0) {
+        throw new Error('authentication.resetPassword.tokenDoesntExist');
+      }
+      const row = result.rows[0];
+
+      return this.mapRowToUser(row);
+    } catch (error) {
+      if (error.message) {
+        throw new Error('authentication.resetPassword.errors.unknownError');
+      }
+
+      throw new Error('authentication.resetPassword.errors.unknownError');
+    }
+  }
+
+  async updateUserPassword(
+    userId: string,
+    hashedPassword: string
+  ): Promise<void> {
+    const query = `UPDATE users SET hashed_password = $1, password_updated_at = NOW() WHERE id = $2`;
+    await this.dbClient.query(query, [hashedPassword, userId]);
+  }
+
+  async clearPasswordResetToken(userId: string): Promise<void> {
+    const query = `UPDATE users SET password_reset_token = null, password_reset_token_expires_at = null WHERE id = $1`;
+    await this.dbClient.query(query, [userId]);
+  }
 }

@@ -8,6 +8,7 @@ import {
   PublicVerifyEmailUsecase,
   PublicResendEmailVerificationUsecase,
   PublicRequestPasswordResetUsecase,
+  PublicResetPasswordUsecase,
 } from '@features/authentication/use-cases/public';
 import { User } from '@shared/entities/User';
 import { NotificationService } from '@shared/services/index';
@@ -69,12 +70,19 @@ export function createAuthenticationRouter(
       publicAuthenticationPresenter
     );
 
+  const publicResetPasswordUsecase = new PublicResetPasswordUsecase(
+    deps.passwordHasher,
+    publicAuthenitcationRepository,
+    publicAuthenticationPresenter
+  );
+
   const publicAuthenticationController = new PublicAuthenticationController(
     publicRegisterUsecase,
     publicLoginUsecase,
     publicVerifyEmailUsecase,
     publicResendEmailVerificationUsecase,
-    publicRequestPasswordResetUsecase
+    publicRequestPasswordResetUsecase,
+    publicResetPasswordUsecase
   );
 
   const router = Router();
@@ -295,6 +303,50 @@ export function createAuthenticationRouter(
         }
 
         const successResponse: TRequestPasswordResetClientResponse = {
+          success: response.success,
+        };
+
+        res.status(200).json(successResponse);
+      } catch (error) {
+        console.log('Router error', error);
+        next(error);
+      }
+    }
+  );
+
+  router.post(
+    '/public/reset-password',
+    async (req: Request, res: Response, next: NextFunction) => {
+      type TResetPasswordClientResponse = {
+        success: boolean;
+        errorCode?: string;
+      };
+
+      try {
+        await publicAuthenticationController.handleResetPasswordRequest(
+          req.body
+        );
+
+        const response = publicAuthenticationPresenter.getResetPasswordResult();
+
+        if (!response) {
+          res.status(500).json({
+            success: false,
+            errorCode: 'authentication.errors.internalServerError',
+          });
+          return;
+        }
+
+        if (!response.success) {
+          const errorResponse: TResetPasswordClientResponse = {
+            success: response.success,
+            errorCode: response.errorCode || undefined,
+          };
+          res.status(400).json(errorResponse);
+          return;
+        }
+
+        const successResponse: TResetPasswordClientResponse = {
           success: response.success,
         };
 

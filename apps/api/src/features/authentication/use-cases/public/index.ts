@@ -35,3 +35,10 @@ export {
 } from './request-password-reset/TPublicRequestPasswordResetModels';
 export { IPublicRequestPasswordResetInputPort } from './request-password-reset/IPublicRequestPasswordResetInputPort';
 export { PublicRequestPasswordResetUsecase } from './request-password-reset/PublicRequestPasswordResetUsecase';
+
+export {
+  TPublicResetPasswordRequestModel,
+  TPublicResetPasswordResponseModel,
+} from './reset-password/TPublicResetPasswordModels';
+export { IPublicResetPasswordInputPort } from './reset-password/IPublicResetPasswordInputPort';
+export { PublicResetPasswordUsecase } from './reset-password/PublicResetPasswordUsecase';

@@ -5,6 +5,7 @@ import {
   TPublicVerifyEmailResponseModel,
   TPublicResendEmailVerificationResponseModel,
   TPublicRequestPasswordResetResponseModel,
+  TPublicResetPasswordResponseModel,
 } from '@features/authentication/use-cases/public';
 
 export class PublicAuthenticationPresenter
@@ -15,8 +16,9 @@ export class PublicAuthenticationPresenter
   private verifyEmailResult: TPublicVerifyEmailResponseModel | null = null;
   private resendEmailVerificationResult: TPublicVerifyEmailResponseModel | null =
     null;
-  private requestPasswordResetResult: TPublicVerifyEmailResponseModel | null =
+  private requestPasswordResetResult: TPublicRequestPasswordResetResponseModel | null =
     null;
+  private resetPasswordResult: TPublicResetPasswordResponseModel | null = null;
 
   presentRegistrationResult(responseModel: TPublicRegisterResponseModel) {
     this.registrationResult = {
@@ -82,5 +84,17 @@ export class PublicAuthenticationPresenter
 
   getRequestPasswordResetResult() {
     return this.requestPasswordResetResult;
+  }
+
+  presentResetPasswordResult(responseModel: TPublicResetPasswordResponseModel) {
+    this.resetPasswordResult = {
+      success: responseModel.success,
+      internalMessage: responseModel.internalMessage,
+      errorCode: responseModel.errorCode,
+    };
+  }
+
+  getResetPasswordResult() {
+    return this.resetPasswordResult;
   }
 }
