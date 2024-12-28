@@ -3,8 +3,9 @@ import { PublicAuthenticationController } from '@features/authentication/interfa
 import { PublicAuthenticationPresenter } from '@features/authentication/interface-adapters/presenters/public/PublicAuthenticationPresenter';
 import { PublicAuthenticationRepository } from '@features/authentication/interface-adapters/repositories/public/PublicAuthenticationRepository';
 import {
-  PublicLoginUsecase,
+  PublicCheckAuthUsecase,
   PublicRegisterUsecase,
+  PublicLoginUsecase,
   PublicVerifyEmailUsecase,
   PublicResendEmailVerificationUsecase,
   PublicRequestPasswordResetUsecase,
@@ -21,6 +22,7 @@ type AuthenticationRouterDependencies = {
   notificationService: NotificationService;
   passwordHasher: PBKDF2PasswordHasher;
   tokenGenerator: TokenGenerator;
+  isAuthenticated;
 };
 
 export function createAuthenticationRouter(
@@ -30,6 +32,11 @@ export function createAuthenticationRouter(
     deps.pgClient
   );
   const publicAuthenticationPresenter = new PublicAuthenticationPresenter();
+
+  const publicCheckAuthUsecase = new PublicCheckAuthUsecase(
+    publicAuthenitcationRepository,
+    publicAuthenticationPresenter
+  );
 
   const publicRegisterUsecase = new PublicRegisterUsecase(
     deps.notificationService,
@@ -77,6 +84,7 @@ export function createAuthenticationRouter(
   );
 
   const publicAuthenticationController = new PublicAuthenticationController(
+    publicCheckAuthUsecase,
     publicRegisterUsecase,
     publicLoginUsecase,
     publicVerifyEmailUsecase,
@@ -86,6 +94,49 @@ export function createAuthenticationRouter(
   );
 
   const router = Router();
+
+  router.get(
+    '/public/check-auth',
+    deps.isAuthenticated,
+    async (req: Request, res: Response, next: NextFunction) => {
+      type TCheckAuthClientResponse = {
+        success: boolean;
+        errorCode?: string;
+        user?: User;
+      };
+
+      const userId = req.session.userId;
+
+      try {
+        await publicAuthenticationController.handleCheckAuthRequest({ userId });
+
+        const response = publicAuthenticationPresenter.getCheckAuthResult();
+        if (!response) {
+          res.status(500).json({
+            success: false,
+            errorCode: 'authentication.errors.internalServerError',
+            user: null,
+          });
+          return;
+        }
+
+        if (!response.success) {
+          const errorResponse: TCheckAuthClientResponse = {
+            success: response.success,
+            errorCode: response.errorCode || undefined,
+            user: null,
+          };
+          res.status(400).json(errorResponse);
+          return;
+        }
+
+        res.status(201).json(response);
+      } catch (error) {
+        console.log('Router error', error);
+        next(error);
+      }
+    }
+  );
 
   router.post(
     '/public/register',
