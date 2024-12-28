@@ -1,4 +1,6 @@
 import {
+  IPublicCheckAuthInputPort,
+  TPublicCheckAuthRequestModel,
   IPublicRegisterInputPort,
   TPublicRegisterRequestModel,
   IPublicLoginInputPort,
@@ -15,6 +17,7 @@ import {
 
 export class PublicAuthenticationController {
   constructor(
+    private readonly checkAuthInteractor: IPublicCheckAuthInputPort,
     private readonly registerInteractor: IPublicRegisterInputPort,
     private readonly loginInteractor: IPublicLoginInputPort,
     private readonly verifyEmailInteractor: IPublicVerifyEmailInputPort,
@@ -22,6 +25,18 @@ export class PublicAuthenticationController {
     private readonly requestPasswordResetInteractor: IPublicRequestPasswordResetInputPort,
     private readonly resetPasswordInteractor: IPublicResetPasswordInputPort
   ) {}
+
+  async handleCheckAuthRequest(
+    rawData: TPublicCheckAuthRequestModel
+  ): Promise<void> {
+    const { userId } = rawData;
+
+    const requestModel: TPublicCheckAuthRequestModel = {
+      userId,
+    };
+
+    await this.checkAuthInteractor.checkAuth(requestModel);
+  }
 
   async handleRegistrationRequest(
     rawData: TPublicRegisterRequestModel

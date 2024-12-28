@@ -36,7 +36,6 @@ export function initializeServer(dependencies: AppDependencies) {
   app.use(sessionConfig);
 
   app.get('/', (req: Request, res: Response) => {
-    console.log(req);
     res.send('<h1>Welcome to LifeOS api</h1>');
   });
 

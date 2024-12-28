@@ -2,6 +2,13 @@ export { IPublicAuthenticationOutputPort } from './IPublicAuthenticationOutputPo
 export { IPublicAuthenticationRepository } from './IPublicAuthenticationRepository';
 
 export {
+  TPublicCheckAuthRequestModel,
+  TPublicCheckAuthResponseModel,
+} from './check-auth/TPublicCheckAuthModels';
+export { IPublicCheckAuthInputPort } from './check-auth/IPublicCheckAuthInputPort';
+export { PublicCheckAuthUsecase } from './check-auth/PublicCheckAuthUsecase';
+
+export {
   TPublicRegisterRequestModel,
   TPublicRegisterResponseModel,
 } from './register/TPublicRegisterModels';

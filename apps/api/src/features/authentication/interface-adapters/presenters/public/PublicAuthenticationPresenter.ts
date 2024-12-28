@@ -1,5 +1,6 @@
 import {
   IPublicAuthenticationOutputPort,
+  TPublicCheckAuthResponseModel,
   TPublicRegisterResponseModel,
   TPublicLoginResponseModel,
   TPublicVerifyEmailResponseModel,
@@ -11,6 +12,7 @@ import {
 export class PublicAuthenticationPresenter
   implements IPublicAuthenticationOutputPort
 {
+  private checkAuthResult: TPublicCheckAuthResponseModel | null = null;
   private registrationResult: TPublicRegisterResponseModel | null = null;
   private loginResult: TPublicLoginResponseModel | null = null;
   private verifyEmailResult: TPublicVerifyEmailResponseModel | null = null;
@@ -19,6 +21,19 @@ export class PublicAuthenticationPresenter
   private requestPasswordResetResult: TPublicRequestPasswordResetResponseModel | null =
     null;
   private resetPasswordResult: TPublicResetPasswordResponseModel | null = null;
+
+  presentCheckAuthResult(responseModel: TPublicCheckAuthResponseModel) {
+    this.checkAuthResult = {
+      success: responseModel.success,
+      internalMessage: responseModel.internalMessage,
+      errorCode: responseModel.errorCode,
+      user: responseModel.user,
+    };
+  }
+
+  getCheckAuthResult() {
+    return this.checkAuthResult;
+  }
 
   presentRegistrationResult(responseModel: TPublicRegisterResponseModel) {
     this.registrationResult = {

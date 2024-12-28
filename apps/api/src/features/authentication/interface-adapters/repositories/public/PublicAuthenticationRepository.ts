@@ -43,8 +43,6 @@ export class PublicAuthenticationRepository
   }
 
   async findUserById(userId: string): Promise<User> {
-    console.log('hello');
-    console.log(userId);
     try {
       const query = `SELECT * FROM users WHERE id = $1`;
       const values = [userId];
