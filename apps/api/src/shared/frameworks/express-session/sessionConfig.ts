@@ -1,7 +1,7 @@
 import session from 'express-session';
 import { sessionStore } from './sessionStore';
 
-// Rolle -> MaxAge in Millisekunden
+// Role -> maxAge in miliseconds
 export const sessionDurations: Record<string, number> = {
   admin: 1 * 60 * 60 * 1000, // 1 Hour
   support: 12 * 60 * 60 * 1000, // 12 Hours
@@ -16,7 +16,6 @@ if (!sessionSecretsEnv) {
 }
 
 const sessionSecrets = sessionSecretsEnv.split(', ');
-const isProduction = process.env.NODE_ENV === 'production';
 
 export const sessionConfig = session({
   store: sessionStore,
@@ -25,8 +24,8 @@ export const sessionConfig = session({
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
-    secure: isProduction,
-    sameSite: isProduction ? 'lax' : 'strict',
+    secure: true,
+    sameSite: 'none',
     // maxAge is set dynamically later
   },
 });
