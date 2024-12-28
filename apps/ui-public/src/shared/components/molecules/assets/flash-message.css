@@ -1,0 +1,14 @@
+.flash-message {
+  font-size: var(--font-xs);
+  padding: 1rem;
+  width: 100%;
+  color: var(--color-button-text);
+}
+
+.flash-message--success {
+  background-color: var(--color-success);
+}
+
+.flash-message--error {
+  background-color: var(--color-error);
+}

@@ -1,6 +1,22 @@
-import { useTranslation } from 'react-i18next';
+import { LandingPageTemplate } from '../templates';
+import {
+  LandingPageHero,
+  LandingPageFeatures,
+  LandingPageInstructions,
+} from '../organisms';
 
 export const LandingPage = () => {
-  const { t } = useTranslation();
-  return <h1>{t('landingPage.title')}</h1>;
+  return (
+    <LandingPageTemplate>
+      <section id="hero" className="landing-page-template__section">
+        <LandingPageHero />
+      </section>
+      <section id="features" className="landing-page-template__section">
+        <LandingPageFeatures />
+      </section>
+      <section id="instructions" className="landing-page-template__section">
+        <LandingPageInstructions />
+      </section>
+    </LandingPageTemplate>
+  );
 };

@@ -1,0 +1,10 @@
+.link {
+  color: var(--color-text);
+  font-size: var(--font-xs);
+  border: none;
+  cursor: pointer;
+}
+
+.link--hover:hover {
+  background-color: var(--color-button-hover);
+}

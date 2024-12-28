@@ -1,5 +1,31 @@
 {
   "landingPage": {
     "title": "Welcome to LifeOS"
+  },
+
+  "authentication": {
+    "login": {
+      "title": "Login",
+      "labels": {
+        "email": "E-mail",
+        "password": "Password",
+        "registerLink": "Not registered yet?",
+        "resendVerificationEmail": "No verification mail received?",
+        "submit": "Login"
+      },
+      "placeholders": {
+        "email": "E-mail",
+        "password": "Password"
+      }
+    }
+  },
+
+  "valueObjects": {
+    "email": {
+      "invalidInput": "The provided email address is invalid."
+    },
+    "password": {
+      "invalidInput": "The provided password is invalid."
+    }
   }
 }

@@ -1,5 +1,63 @@
 {
+  "navBar": {
+    "home": "Home",
+    "userProfile": "Profil"
+  },
+
   "landingPage": {
-    "title": "Willkommen bei LifeOS"
+    "hero": {
+      "title": "Willkommen bei Lockify",
+      "description": "Deine ultimative Lösung, um Passwörter, Bankinformationen und mehr zu sichern und zu verwalten.",
+      "button": "Mehr erfahren"
+    },
+    "features": {
+      "title": "Funktionen",
+      "itemTitle1": "Sichere Verschlüsselung",
+      "itemDescription1": "Wir verwenden modernste Verschlüsselung, um deine Daten sicher und geschützt zu halten.",
+      "itemTitle2": "Einfacher Zugang",
+      "itemDescription2": "Greife von jedem Gerät, jederzeit und überall auf deine Daten zu.",
+      "itemTitle3": "Alles speichern",
+      "itemDescription3": "Speichere deine Passwörter, Bankinformationen, Kontakte und Notizen. Halte alle wichtigen Informationen organisiert und sicher."
+    },
+    "instructions": {
+      "title": "So funktioniert's",
+      "itemTitle1": "Schritt 1",
+      "itemDescription1": "Erstelle ein Konto und richte dein Master-Passwort ein.",
+      "itemTitle2": "Schritt 2",
+      "itemDescription2": "Speichere alle deine Daten an einem sicheren Ort.",
+      "itemTitle3": "Schritt 3",
+      "itemDescription3": "Greife einfach auf deine Daten zu und verwalte sie mühelos."
+    }
+  },
+
+  "authentication": {
+    "login": {
+      "title": "Anmelden",
+      "labels": {
+        "email": "E-Mail",
+        "password": "Passwort",
+        "registerLink": "Noch nicht registriert?",
+        "resendVerificationEmail": "Keine Verifizierungsmail erhalten?",
+        "submit": "Anmelden"
+      },
+      "placeholders": {
+        "email": "E-Mail",
+        "password": "Passwort"
+      },
+
+      "linkMessage": "Noch nicht registriert?",
+      "forgotMessage": "Passwort vergessen?",
+      "forgotLink": "Passwort vergessen?",
+      "infoText": "Test Nutzer für Recruiter und Developer."
+    }
+  },
+
+  "valueObjects": {
+    "email": {
+      "invalidInput": "Die angegebene E-Mail-Adresse ist ungültig."
+    },
+    "password": {
+      "invalidInput": "Das angegebene Passwort ist ungültig"
+    }
   }
 }

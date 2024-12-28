@@ -1,0 +1,21 @@
+.textarea__container {
+  font-size: var(--font-sm);
+  color: var(--color-text);
+}
+
+.textarea__label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.textarea__field {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-input);
+  outline: none;
+}
+
+.textarea__remaining {
+  font-size: var(--font-xs);
+}

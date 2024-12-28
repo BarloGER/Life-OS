@@ -1,0 +1,25 @@
+.submit-button {
+  background-color: var(--color-button);
+  color: var(--color-button-text);
+  padding: 0.5rem;
+  cursor: pointer;
+  border: none;
+  font-size: var(--font-sm);
+}
+
+.submit-button--hover:hover {
+  background-color: var(--color-button-hover);
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
