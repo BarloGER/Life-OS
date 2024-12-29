@@ -4,6 +4,8 @@ import { LandingPage } from '@shared/components/pages';
 import {
   LoginPage,
   RegisterPage,
+  ResendEmailVerificationPage,
+  VerifyEmailPage,
 } from '@features/authentication/components/pages';
 
 export const Router = () => {
@@ -14,6 +16,11 @@ export const Router = () => {
           <Route index element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/verify-email" element={<VerifyEmailPage />} />
+          <Route
+            path="/resend-email-verification"
+            element={<ResendEmailVerificationPage />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

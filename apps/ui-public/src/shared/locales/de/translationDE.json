@@ -76,6 +76,39 @@
       "forgotMessage": "Passwort vergessen?",
       "forgotLink": "Passwort vergessen?",
       "infoText": "Test Nutzer für Recruiter und Developer."
+    },
+
+    "verifyEmail": {
+      "title": "Email Verifizieren",
+      "labels": {
+        "resendVerificationLink": "Neuen Code anfordern"
+      },
+      "text": {
+        "resendVerificationInfoText": "Dein Code ist abgelaufen? "
+      },
+
+      "success": "Du hast deine E-Mail-Adresse erfolgreich verifizier. Du kannst jetzt mit dem Login fortfahren.",
+      "errors": {
+        "tokenExpired": "Dein Verifizierungscode ist bereits abgelaufen. Folge dem Link, um einen neuen anzufordern.",
+        "unknownError": "Etwas ist schiefgelaufen. Hast du deine E-Mail-Adresse vielleicht schon aktiviert? Wenn nicht, wende dich bitte an den Support."
+      }
+    },
+
+    "resendEmailVerification": {
+      "title": "Neue Verifizierungsmail anfordern",
+      "labels": {
+        "email": "E-Mail",
+        "password": "Passwort",
+        "submit": "Anfordern"
+      },
+      "placeholders": {
+        "email": "E-Mail",
+        "password": "Passwort"
+      },
+      "success": "Dir wurde ein neuer Verifizierungslink per E-Mail zugesendet.",
+      "errors": {
+        "invalidCredentials": "Ungültige Anmeldedaten"
+      }
     }
   },
 

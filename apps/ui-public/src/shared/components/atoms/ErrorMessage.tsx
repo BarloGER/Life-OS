@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import './assets/error-message.css';
 
 type ErrorMessageProps = {
@@ -5,5 +6,6 @@ type ErrorMessageProps = {
 };
 
 export const ErrorMessage: React.FC<ErrorMessageProps> = ({ message }) => {
-  return <div className="error-message">{message}</div>;
+  const { t } = useTranslation();
+  return <div className="error-message">{t(message)}</div>;
 };

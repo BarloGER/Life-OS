@@ -6,11 +6,11 @@ import {
 export class NotificationService implements INotificationService {
   async sendEmailVerificationMail(
     emailAddress: string,
-    emailVerificationToken: string
+    emailVerificationToken: string,
   ): Promise<EmailVerificationMailResponse> {
     try {
       console.log(
-        `http://localhost:4200/verify-email?token=${emailVerificationToken}`
+        `https://localhost:4200/verify-email?token=${emailVerificationToken}`,
       );
 
       return {
@@ -28,11 +28,11 @@ export class NotificationService implements INotificationService {
 
   async sendPasswordResetMail(
     emailAddress: string,
-    passwordResetToken: string
+    passwordResetToken: string,
   ): Promise<EmailVerificationMailResponse> {
     try {
       console.log(
-        `Email with password reset token ${passwordResetToken} successfuly send to ${emailAddress}`
+        `Email with password reset token ${passwordResetToken} successfuly send to ${emailAddress}`,
       );
 
       return {
@@ -49,7 +49,7 @@ export class NotificationService implements INotificationService {
   }
 
   async sendBlockNoticeMail(
-    emailAddress: string
+    emailAddress: string,
   ): Promise<EmailVerificationMailResponse> {
     try {
       console.log(`Blocked user with email ${emailAddress}`);
@@ -68,7 +68,7 @@ export class NotificationService implements INotificationService {
   }
 
   async sendUnblockNoticeMail(
-    emailAddress: string
+    emailAddress: string,
   ): Promise<EmailVerificationMailResponse> {
     try {
       console.log(`Unblocked user with email ${emailAddress}`);

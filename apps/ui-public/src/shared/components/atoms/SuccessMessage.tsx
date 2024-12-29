@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import './assets/success-message.css';
 
 type SuccessMessageProps = {
@@ -5,5 +6,6 @@ type SuccessMessageProps = {
 };
 
 export const SuccessMessage: React.FC<SuccessMessageProps> = ({ message }) => {
-  return <div className="success-message">{message}</div>;
+  const { t } = useTranslation();
+  return <div className="success-message">{t(message)}</div>;
 };
