@@ -231,6 +231,46 @@ export function createAuthenticationRouter(
   );
 
   router.post(
+    '/public/logout',
+    deps.isAuthenticated,
+    async (req: Request, res: Response, next: NextFunction) => {
+      type TLogoutClientResponse = {
+        success: boolean;
+        errorCode?: string;
+      };
+
+      try {
+        req.session.destroy((err) => {
+          if (err) {
+            const errorResponse: TLogoutClientResponse = {
+              success: false,
+              errorCode: 'authentication.logout.failed',
+            };
+            res.status(400).json(errorResponse);
+            return;
+          }
+
+          res.clearCookie('connect.sid', {
+            path: '/',
+            secure: true,
+            httpOnly: true,
+            sameSite: true,
+          });
+
+          const successResponse: TLogoutClientResponse = {
+            success: true,
+          };
+
+          res.status(200).json(successResponse);
+        });
+      } catch (error) {
+        console.log('Router error', error);
+        next(error);
+      }
+    },
+  );
+
+  router.post(
     '/public/verify-email',
     async (req: Request, res: Response, next: NextFunction) => {
       type TVerifyEmailClientResponse = {

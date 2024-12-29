@@ -6,11 +6,38 @@ import './assets/nav-bar.css';
 
 export const NavBar = () => {
   const { t, i18n } = useTranslation();
-  const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 
   const changeLanguage = (language: string) => {
     i18n.changeLanguage(language);
   };
+
+  async function logoutRequest() {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/auth/public/logout`,
+        {
+          method: 'POST',
+          credentials: 'include',
+        },
+      );
+
+      return response.json();
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error);
+      }
+    }
+  }
+
+  async function logout() {
+    const logoutResponse = await logoutRequest();
+    if (logoutResponse.success) {
+      setIsAuthenticated(false);
+    }
+
+    return;
+  }
 
   return (
     <nav className="nav-bar">
@@ -47,6 +74,9 @@ export const NavBar = () => {
               <NavLink to="/user-profile" className="nav-bar__link">
                 {t('navBar.links.userProfile')}
               </NavLink>
+              <button onClick={() => logout()} className="nav-bar__logout">
+                Logout
+              </button>
             </>
           ) : (
             <>
