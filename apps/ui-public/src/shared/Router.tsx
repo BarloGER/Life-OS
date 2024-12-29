@@ -4,6 +4,7 @@ import { LandingPage } from '@shared/components/pages';
 import {
   LoginPage,
   RegisterPage,
+  RequestPasswordResetPage,
   ResendEmailVerificationPage,
   ResetPasswordPage,
   VerifyEmailPage,
@@ -23,6 +24,10 @@ export const Router = () => {
             element={<ResendEmailVerificationPage />}
           />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
+          <Route
+            path="/request-password-reset"
+            element={<RequestPasswordResetPage />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

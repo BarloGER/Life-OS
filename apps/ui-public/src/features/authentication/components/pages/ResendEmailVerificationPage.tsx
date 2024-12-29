@@ -1,7 +1,7 @@
 import { useState, FormEvent, ChangeEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Email, Password, User } from '@shared/entities/index';
+import { Email, Password } from '@shared/entities/index';
 
 import { AuthenticationTemplate } from '../templates';
 import { ResendEmailVerificationForm } from '../organisms';
@@ -15,7 +15,6 @@ interface ResendEmailVerificationResponse {
   success: boolean;
   errorCode?: string;
   message?: string;
-  user?: User;
 }
 
 export const ResendEmailVerificationPage = () => {
@@ -45,7 +44,6 @@ export const ResendEmailVerificationPage = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(data),
-          credentials: 'include',
         },
       );
       return (await response.json()) as ResendEmailVerificationResponse;

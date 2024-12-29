@@ -41,18 +41,14 @@
         "email": "E-Mail",
         "password": "Passwort",
         "registerLink": "Noch nicht registriert?",
+        "requestPasswordResetLink": "Passwort vergessen?",
         "resendVerificationEmail": "Keine Verifizierungsmail erhalten?",
         "submit": "Anmelden"
       },
       "placeholders": {
         "email": "E-Mail",
         "password": "Passwort"
-      },
-
-      "linkMessage": "Noch nicht registriert?",
-      "forgotMessage": "Passwort vergessen?",
-      "forgotLink": "Passwort vergessen?",
-      "infoText": "Test Nutzer für Recruiter und Developer."
+      }
     },
 
     "register": {
@@ -112,7 +108,7 @@
     },
 
     "resetPassword": {
-      "title": "Passwort Zurücksetzen",
+      "title": "Neues Passwort festlegen",
       "labels": {
         "password": "Neues Passwort",
         "requestPasswordResetLink": "Keine Email erhalten?",
@@ -124,6 +120,22 @@
       "success": "Dein Passwort wurde erfolgreich geändert. Du kannst dich jetzt anmelden.",
       "errors": {
         "unknownError": "Es ist ein Fehler aufgetreten. Hast du dein Passwort schon zurückgesetzt? Wenn nicht, kannst du über den Link eine neue Email anfordern."
+      }
+    },
+
+    "requestPasswordReset": {
+      "title": "Passwort Zurücksetzen",
+      "labels": {
+        "email": "Registrierte E-Mail",
+        "requestPasswordResetLink": "Keine Email erhalten?",
+        "submit": "Absenden"
+      },
+      "placeholders": {
+        "email": "E-Mail"
+      },
+      "success": "Wenn deine E-Mail Adresse registriert ist, wurde an deine E-Mail Adresse ein Link zum zurücksetzen deines Passworts gesendet.",
+      "errors": {
+        "unknownError": "Es ist ein unbekannter Fehler aufgetreten."
       }
     }
   },

@@ -64,7 +64,11 @@ export const LoginForm: React.FC<LoginFormProps> = ({
         {t('authentication.login.labels.registerLink')}
       </Link>
 
-      <Link className="login__link" to="/resend-verification-email">
+      <Link className="login__link" to="/request-password-reset">
+        {t('authentication.login.labels.requestPasswordResetLink')}
+      </Link>
+
+      <Link className="login__link" to="/resend-email-verification">
         {t('authentication.login.labels.resendVerificationEmail')}
       </Link>
 
