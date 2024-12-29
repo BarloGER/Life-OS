@@ -6,6 +6,7 @@ export type TPublicRegisterRequestModel = {
   password: string;
   isNewsletterAccepted: boolean;
   isTermsAccepted: boolean;
+  language: string;
 };
 
 export type TPublicRegisterResponseModel = {

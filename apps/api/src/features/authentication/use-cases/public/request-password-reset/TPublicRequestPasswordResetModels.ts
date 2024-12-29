@@ -1,5 +1,6 @@
 export type TPublicRequestPasswordResetRequestModel = {
   email: string;
+  language: string;
 };
 
 export type TPublicRequestPasswordResetResponseModel = {

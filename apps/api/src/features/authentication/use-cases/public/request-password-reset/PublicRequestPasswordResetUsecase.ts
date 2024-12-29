@@ -18,11 +18,11 @@ export class PublicRequestPasswordResetUsecase
     private readonly tokenGenerator: ITokenGenerator,
 
     private readonly repository: IPublicAuthenticationRepository,
-    private readonly outputPort: IPublicAuthenticationOutputPort
+    private readonly outputPort: IPublicAuthenticationOutputPort,
   ) {}
 
   async requestPasswordReset(
-    requestModel: TPublicRequestPasswordResetRequestModel
+    requestModel: TPublicRequestPasswordResetRequestModel,
   ): Promise<void> {
     try {
       let validEmail: Email;
@@ -41,7 +41,7 @@ export class PublicRequestPasswordResetUsecase
       let foundUser: User;
       try {
         foundUser = await this.repository.findUserByEmail(
-          validEmail.getValue()
+          validEmail.getValue(),
         );
       } catch (error) {
         return this.outputPort.presentRequestPasswordResetResult({
@@ -56,14 +56,14 @@ export class PublicRequestPasswordResetUsecase
       let passwordResetTokenObj: IToken;
       try {
         const TOKEN_LENGTH = parseInt(
-          process.env.PASSWORD_RESET_TOKEN_LENGTH || '32'
+          process.env.PASSWORD_RESET_TOKEN_LENGTH || '32',
         );
         const TOKEN_LIFETIME = parseInt(
-          process.env.PASSWORD_RESET_TOKEN_LIFETIME || '3600'
+          process.env.PASSWORD_RESET_TOKEN_LIFETIME || '3600',
         );
         passwordResetTokenObj = await this.tokenGenerator.generateToken(
           TOKEN_LENGTH,
-          TOKEN_LIFETIME
+          TOKEN_LIFETIME,
         );
         console.log(passwordResetTokenObj);
       } catch (error) {
@@ -80,7 +80,7 @@ export class PublicRequestPasswordResetUsecase
         await this.repository.updatePasswordResetToken(
           foundUser.id,
           passwordResetTokenObj.token,
-          passwordResetTokenObj.expiresAt
+          passwordResetTokenObj.expiresAt,
         );
       } catch (error) {
         return this.outputPort.presentRequestPasswordResetResult({
@@ -95,7 +95,8 @@ export class PublicRequestPasswordResetUsecase
       try {
         await this.notificationService.sendPasswordResetMail(
           foundUser.email,
-          passwordResetTokenObj.token
+          passwordResetTokenObj.token,
+          requestModel.language,
         );
       } catch (error) {
         return this.outputPort.presentRequestPasswordResetResult({

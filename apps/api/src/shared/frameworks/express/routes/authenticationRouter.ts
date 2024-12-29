@@ -158,9 +158,12 @@ export function createAuthenticationRouter(
         errorCode?: string;
       };
 
+      const language = req.headers['accept-language'] || 'en';
+
       try {
         await publicAuthenticationController.handleRegistrationRequest(
           req.body,
+          language,
         );
 
         const response = publicAuthenticationPresenter.getRegistrationResult();
@@ -203,8 +206,13 @@ export function createAuthenticationRouter(
         user?: User;
       };
 
+      const language = req.headers['accept-language'] || 'en';
+
       try {
-        await publicAuthenticationController.handleLoginRequest(req.body);
+        await publicAuthenticationController.handleLoginRequest(
+          req.body,
+          language,
+        );
 
         const response = publicAuthenticationPresenter.getLoginResult();
 
@@ -339,9 +347,12 @@ export function createAuthenticationRouter(
         errorCode?: string;
       };
 
+      const language = req.headers['accept-language'] || 'en';
+
       try {
         await publicAuthenticationController.handleResendEmailVerificationRequest(
           req.body,
+          language,
         );
 
         const response =
@@ -385,9 +396,12 @@ export function createAuthenticationRouter(
         errorCode?: string;
       };
 
+      const language = req.headers['accept-language'] || 'en';
+
       try {
         await publicAuthenticationController.handleRequestPasswordResetRequest(
           req.body,
+          language,
         );
 
         const response =

@@ -3,6 +3,7 @@ import { User } from '@shared/entities/User';
 export type TPublicLoginRequestModel = {
   email: string;
   password: string;
+  language: string;
 };
 
 export type TPublicLoginResponseModel = {

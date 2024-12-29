@@ -17,11 +17,11 @@ export class PublicResendEmailVerificationUsecase
     private readonly passwordHasher: IPasswordHasher,
     private readonly tokenGenerator: ITokenGenerator,
     private readonly repository: IPublicAuthenticationRepository,
-    private readonly outputPort: IPublicAuthenticationOutputPort
+    private readonly outputPort: IPublicAuthenticationOutputPort,
   ) {}
 
   async resendEmailVerification(
-    requestModel: TPublicResendEmailVerificationRequestModel
+    requestModel: TPublicResendEmailVerificationRequestModel,
   ): Promise<void> {
     try {
       let validEmail: Email, validPassword: Password;
@@ -42,7 +42,7 @@ export class PublicResendEmailVerificationUsecase
       let foundUser: User;
       try {
         foundUser = await this.repository.findUserByEmail(
-          validEmail.getValue()
+          validEmail.getValue(),
         );
       } catch (error) {
         return this.outputPort.presentResendEmailVerificationResult({
@@ -58,11 +58,11 @@ export class PublicResendEmailVerificationUsecase
       try {
         isPasswordValid = await this.passwordHasher.compare(
           validPassword.getValue(),
-          foundUser.hashedPassword
+          foundUser.hashedPassword,
         );
         if (!isPasswordValid) {
           throw Error(
-            'authentication.resendEmailVerification.errors.invalidCredentials'
+            'authentication.resendEmailVerification.errors.invalidCredentials',
           );
         }
       } catch (error) {
@@ -77,21 +77,21 @@ export class PublicResendEmailVerificationUsecase
 
       if (foundUser.isEmailVerified) {
         throw Error(
-          'authentication.resendEmailVerification.errors.emailAlreadyVerified'
+          'authentication.resendEmailVerification.errors.emailAlreadyVerified',
         );
       }
 
       let emailVerificationTokenObj: IToken;
       try {
         const TOKEN_LENGTH = parseInt(
-          process.env.EMAIL_VERIFICATION_TOKEN_LENGTH || '32'
+          process.env.EMAIL_VERIFICATION_TOKEN_LENGTH || '32',
         );
         const TOKEN_LIFETIME = parseInt(
-          process.env.EMAIL_VERIFICATION_TOKEN_LIFETIME || '3600'
+          process.env.EMAIL_VERIFICATION_TOKEN_LIFETIME || '3600',
         );
         emailVerificationTokenObj = await this.tokenGenerator.generateToken(
           TOKEN_LENGTH,
-          TOKEN_LIFETIME
+          TOKEN_LIFETIME,
         );
       } catch (error) {
         return this.outputPort.presentResendEmailVerificationResult({
@@ -106,7 +106,7 @@ export class PublicResendEmailVerificationUsecase
         await this.repository.updateEmailVerificationToken(
           foundUser.id,
           emailVerificationTokenObj.token,
-          emailVerificationTokenObj.expiresAt
+          emailVerificationTokenObj.expiresAt,
         );
       } catch (error) {
         return this.outputPort.presentResendEmailVerificationResult({
@@ -121,7 +121,8 @@ export class PublicResendEmailVerificationUsecase
       try {
         await this.notificationService.sendEmailVerificationMail(
           foundUser.email,
-          emailVerificationTokenObj.token
+          emailVerificationTokenObj.token,
+          requestModel.language,
         );
       } catch (error) {
         return this.outputPort.presentResendEmailVerificationResult({

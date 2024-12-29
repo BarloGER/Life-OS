@@ -15,7 +15,7 @@ export class PublicLoginUsecase implements IPublicLoginInputPort {
     private readonly tokenGenerator: ITokenGenerator,
 
     private readonly repository: IPublicAuthenticationRepository,
-    private readonly outputPort: IPublicAuthenticationOutputPort
+    private readonly outputPort: IPublicAuthenticationOutputPort,
   ) {}
 
   async loginUser(requestModel: TPublicLoginRequestModel): Promise<void> {
@@ -41,7 +41,7 @@ export class PublicLoginUsecase implements IPublicLoginInputPort {
       let foundUser: User;
       try {
         foundUser = await this.repository.findUserByEmail(
-          validEmail.getValue()
+          validEmail.getValue(),
         );
       } catch (error) {
         return this.outputPort.presentLoginResult({
@@ -65,13 +65,17 @@ export class PublicLoginUsecase implements IPublicLoginInputPort {
         throw Error('authentication.login.errors.accountLocked');
       } else if (foundUser.lockedUntil) {
         await this.repository.unlockUserAccount(foundUser.id);
+        this.notificationService.sendUnblockNoticeMail(
+          foundUser.email,
+          requestModel.language,
+        );
       }
 
       let isPasswordValid: boolean;
       try {
         isPasswordValid = await this.passwordHasher.compare(
           validPassword.getValue(),
-          foundUser.hashedPassword
+          foundUser.hashedPassword,
         );
         if (!isPasswordValid) {
           await this.repository.incrementFailedLoginAttempts(foundUser.id);
@@ -80,7 +84,11 @@ export class PublicLoginUsecase implements IPublicLoginInputPort {
           if (foundUser.failedLoginAttempts + 1 >= MAX_FAILED_ATTEMPTS) {
             await this.repository.lockUserAccount(
               foundUser.id,
-              LOCK_DURATION_MINUTES
+              LOCK_DURATION_MINUTES,
+            );
+            this.notificationService.sendBlockNoticeMail(
+              foundUser.email,
+              requestModel.language,
             );
             throw Error('authentication.login.errors.accountLocked');
           }

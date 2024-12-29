@@ -23,7 +23,7 @@ export class PublicRegisterUsecase implements IPublicRegisterInputPort {
     private readonly tokenGenerator: ITokenGenerator,
 
     private readonly repository: IPublicAuthenticationRepository,
-    private readonly outputPort: IPublicAuthenticationOutputPort
+    private readonly outputPort: IPublicAuthenticationOutputPort,
   ) {}
 
   async registerUser(requestModel: TPublicRegisterRequestModel): Promise<void> {
@@ -52,7 +52,7 @@ export class PublicRegisterUsecase implements IPublicRegisterInputPort {
       let hashedPassword: string;
       try {
         hashedPassword = await this.passwordHasher.hash(
-          validPassword.getValue()
+          validPassword.getValue(),
         );
       } catch (error) {
         return this.outputPort.presentRegistrationResult({
@@ -67,14 +67,14 @@ export class PublicRegisterUsecase implements IPublicRegisterInputPort {
       let emailVerificationTokenObj: IToken;
       try {
         const TOKEN_LENGTH = parseInt(
-          process.env.EMAIL_VERIFICATION_TOKEN_LENGTH || '32'
+          process.env.EMAIL_VERIFICATION_TOKEN_LENGTH || '32',
         );
         const TOKEN_LIFETIME = parseInt(
-          process.env.EMAIL_VERIFICATION_TOKEN_LIFETIME || '3600'
+          process.env.EMAIL_VERIFICATION_TOKEN_LIFETIME || '3600',
         );
         emailVerificationTokenObj = await this.tokenGenerator.generateToken(
           TOKEN_LENGTH,
-          TOKEN_LIFETIME
+          TOKEN_LIFETIME,
         );
       } catch (error) {
         return this.outputPort.presentRegistrationResult({
@@ -95,7 +95,7 @@ export class PublicRegisterUsecase implements IPublicRegisterInputPort {
           emailVerificationTokenObj.expiresAt,
           hashedPassword,
           newsletterAccepted.getValue(),
-          termsAcceptedAt.getDate()
+          termsAcceptedAt.getDate(),
         );
       } catch (error) {
         return this.outputPort.presentRegistrationResult({
@@ -110,7 +110,8 @@ export class PublicRegisterUsecase implements IPublicRegisterInputPort {
       try {
         await this.notificationService.sendEmailVerificationMail(
           user.email,
-          user.emailVerificationToken
+          user.emailVerificationToken,
+          requestModel.language,
         );
       } catch (error) {
         // No return, to proceed with success message, because user is already created

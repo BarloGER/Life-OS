@@ -67,11 +67,7 @@
         "email": "E-Mail",
         "password": "Passwort"
       },
-
-      "linkMessage": "Noch nicht registriert?",
-      "forgotMessage": "Passwort vergessen?",
-      "forgotLink": "Passwort vergessen?",
-      "infoText": "Test Nutzer für Recruiter und Developer."
+      "success": "Es wurde eine Bestätigungslink an die hinterlegte E-Mail Adresse gesendet. Bitte überprüfe dein Postfach."
     },
 
     "verifyEmail": {

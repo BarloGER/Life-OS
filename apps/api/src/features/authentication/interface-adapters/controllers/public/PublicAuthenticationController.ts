@@ -23,11 +23,11 @@ export class PublicAuthenticationController {
     private readonly verifyEmailInteractor: IPublicVerifyEmailInputPort,
     private readonly resendEmailVerificationInteractor: IPublicResendEmailVerificationInputPort,
     private readonly requestPasswordResetInteractor: IPublicRequestPasswordResetInputPort,
-    private readonly resetPasswordInteractor: IPublicResetPasswordInputPort
+    private readonly resetPasswordInteractor: IPublicResetPasswordInputPort,
   ) {}
 
   async handleCheckAuthRequest(
-    rawData: TPublicCheckAuthRequestModel
+    rawData: TPublicCheckAuthRequestModel,
   ): Promise<void> {
     const { userId } = rawData;
 
@@ -39,7 +39,8 @@ export class PublicAuthenticationController {
   }
 
   async handleRegistrationRequest(
-    rawData: TPublicRegisterRequestModel
+    rawData: TPublicRegisterRequestModel,
+    language: string,
   ): Promise<void> {
     const { username, email, password, isNewsletterAccepted, isTermsAccepted } =
       rawData;
@@ -50,24 +51,29 @@ export class PublicAuthenticationController {
       password,
       isNewsletterAccepted,
       isTermsAccepted,
+      language,
     };
 
     await this.registerInteractor.registerUser(requestModel);
   }
 
-  async handleLoginRequest(rawData: TPublicLoginRequestModel): Promise<void> {
+  async handleLoginRequest(
+    rawData: TPublicLoginRequestModel,
+    language: string,
+  ): Promise<void> {
     const { email, password } = rawData;
 
     const requestModel: TPublicLoginRequestModel = {
       email,
       password,
+      language,
     };
 
     await this.loginInteractor.loginUser(requestModel);
   }
 
   async handleVerifyEmailRequest(
-    rawData: TPublicVerifyEmailRequestModel
+    rawData: TPublicVerifyEmailRequestModel,
   ): Promise<void> {
     const { token } = rawData;
 
@@ -79,36 +85,40 @@ export class PublicAuthenticationController {
   }
 
   async handleResendEmailVerificationRequest(
-    rawData: TPublicResendEmailVerificationRequestModel
+    rawData: TPublicResendEmailVerificationRequestModel,
+    language: string,
   ): Promise<void> {
     const { email, password } = rawData;
 
     const requestModel: TPublicResendEmailVerificationRequestModel = {
       email,
       password,
+      language,
     };
 
     await this.resendEmailVerificationInteractor.resendEmailVerification(
-      requestModel
+      requestModel,
     );
   }
 
   async handleRequestPasswordResetRequest(
-    rawData: TPublicRequestPasswordResetRequestModel
+    rawData: TPublicRequestPasswordResetRequestModel,
+    language: string,
   ): Promise<void> {
     const { email } = rawData;
 
     const requestModel: TPublicRequestPasswordResetRequestModel = {
       email,
+      language,
     };
 
     await this.requestPasswordResetInteractor.requestPasswordReset(
-      requestModel
+      requestModel,
     );
   }
 
   async handleResetPasswordRequest(
-    rawData: TPublicResetPasswordRequestModel
+    rawData: TPublicResetPasswordRequestModel,
   ): Promise<void> {
     const { passwordResetToken, newPassword } = rawData;
 

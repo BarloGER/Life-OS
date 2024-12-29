@@ -1,6 +1,7 @@
 export type TPublicResendEmailVerificationRequestModel = {
   email: string;
   password: string;
+  language: string;
 };
 
 export type TPublicResendEmailVerificationResponseModel = {
