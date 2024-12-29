@@ -1,4 +1,5 @@
 export { Button } from './Button';
+export { Checkbox } from './Checkbox';
 export { ErrorMessage } from './ErrorMessage';
 export { ErrorText } from './ErrorText';
 export { Input } from './Input';

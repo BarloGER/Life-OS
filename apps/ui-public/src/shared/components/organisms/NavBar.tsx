@@ -1,9 +1,12 @@
+import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
+import { AuthContext } from '@shared/context/AuthContext';
 import { NavLink } from 'react-router-dom';
 import './assets/nav-bar.css';
 
 export const NavBar = () => {
   const { t, i18n } = useTranslation();
+  const { isAuthenticated } = useContext(AuthContext);
 
   const changeLanguage = (language: string) => {
     i18n.changeLanguage(language);
@@ -36,12 +39,25 @@ export const NavBar = () => {
           >
             DE
           </button>
-          <NavLink to="/" className="nav-bar__link">
-            {t('navBar.home')}
-          </NavLink>
-          <NavLink to="/user-profile" className="nav-bar__link">
-            {t('navBar.userProfile')}
-          </NavLink>
+          {isAuthenticated ? (
+            <>
+              <NavLink to="/" className="nav-bar__link">
+                {t('navBar.links.home')}
+              </NavLink>
+              <NavLink to="/user-profile" className="nav-bar__link">
+                {t('navBar.links.userProfile')}
+              </NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink to="/login" className="nav-bar__link">
+                {t('navBar.links.login')}
+              </NavLink>
+              <NavLink to="/register" className="nav-bar__link">
+                {t('navBar.links.register')}
+              </NavLink>
+            </>
+          )}
         </div>
       </div>
     </nav>

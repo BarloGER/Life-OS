@@ -16,6 +16,9 @@ node_modules
 # Dev cerificates
 certs
 
+# Personal Files
+TODO.md
+
 # IDEs and editors
 /.idea
 .project

@@ -1,7 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router';
 import { GlobalLayout } from './layouts';
 import { LandingPage } from '@shared/components/pages';
-import { LoginPage } from '@features/authentication/components/pages';
+import {
+  LoginPage,
+  RegisterPage,
+} from '@features/authentication/components/pages';
 
 export const Router = () => {
   return (
@@ -10,6 +13,7 @@ export const Router = () => {
         <Route path="/" element={<GlobalLayout />}>
           <Route index element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

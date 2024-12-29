@@ -1,7 +1,11 @@
 {
   "navBar": {
-    "home": "Home",
-    "userProfile": "Profil"
+    "links": {
+      "login": "Anmelden",
+      "register": "Registrieren",
+      "home": "Home",
+      "userProfile": "Profil"
+    }
   },
 
   "landingPage": {
@@ -41,6 +45,29 @@
         "submit": "Anmelden"
       },
       "placeholders": {
+        "email": "E-Mail",
+        "password": "Passwort"
+      },
+
+      "linkMessage": "Noch nicht registriert?",
+      "forgotMessage": "Passwort vergessen?",
+      "forgotLink": "Passwort vergessen?",
+      "infoText": "Test Nutzer für Recruiter und Developer."
+    },
+
+    "register": {
+      "title": "Registrieren",
+      "labels": {
+        "username": "Benutzername",
+        "email": "E-Mail",
+        "password": "Passwort",
+        "newsletter": "Newsletter akzeptieren",
+        "terms": "Nutzungsbedingungen akzeptieren",
+        "loginLink": "Bereits registriert?",
+        "submit": "Registrieren"
+      },
+      "placeholders": {
+        "username": "Benutzername",
         "email": "E-Mail",
         "password": "Passwort"
       },
