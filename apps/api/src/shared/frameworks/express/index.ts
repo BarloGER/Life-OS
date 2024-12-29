@@ -6,11 +6,15 @@ import cors, { CorsOptions } from 'cors';
 import { sessionConfig } from '../express-session';
 import { AppDependencies } from 'main';
 import { createAuthenticationRouter } from './routes/authenticationRouter';
+import { createRateLimiter } from './middlewares/rateLimiterFactory';
 
 export function initializeServer(dependencies: AppDependencies) {
   const app: Express = express();
   const PORT = 8080;
   const HOST = '0.0.0.0';
+
+  // 15 minutes / 100 request
+  const globalLimiter = createRateLimiter(15, 100);
 
   const whitelist = process.env.CLIENT_URLS
     ? process.env.CLIENT_URLS.split(',')
@@ -23,12 +27,13 @@ export function initializeServer(dependencies: AppDependencies) {
       if (whitelist.indexOf(origin) !== -1) {
         callback(null, true);
       } else {
-        callback(new Error('Not allowed by CORS'));
+        callback(new Error('errors.corsNotAllowed'));
       }
     },
     credentials: true,
   };
 
+  app.use(globalLimiter);
   app.use(cors(corsOptions));
   app.use(express.json({ limit: '5mb' }));
   app.use(express.urlencoded({ extended: true }));
@@ -57,7 +62,7 @@ export function initializeServer(dependencies: AppDependencies) {
 
     https.createServer(sslOptions, app).listen(PORT, HOST, () => {
       console.log(
-        `[server]: HTTPS Server is running on https://${HOST}:${PORT}`
+        `[server]: HTTPS Server is running on https://${HOST}:${PORT}`,
       );
     });
   } else {

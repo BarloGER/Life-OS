@@ -1,4 +1,5 @@
 import { sessionDurations } from '@shared/frameworks/express-session';
+import { createRateLimiter } from '../middlewares/rateLimiterFactory';
 import { PublicAuthenticationController } from '@features/authentication/interface-adapters/controllers/public/PublicAuthenticationController';
 import { PublicAuthenticationPresenter } from '@features/authentication/interface-adapters/presenters/public/PublicAuthenticationPresenter';
 import { PublicAuthenticationRepository } from '@features/authentication/interface-adapters/repositories/public/PublicAuthenticationRepository';
@@ -24,6 +25,15 @@ type AuthenticationRouterDependencies = {
   tokenGenerator: TokenGenerator;
   isAuthenticated;
 };
+
+const checkAuthLimiter = createRateLimiter(15, 100); // 100 in 15min
+const registerLimiter = createRateLimiter(5, 5); // 5 in 5min
+const loginLimiter = createRateLimiter(5, 5); // 5 in 5min
+const logoutLimiter = createRateLimiter(5, 5); // 5 in 5min
+const verifyEmailLimiter = createRateLimiter(5, 5); // 5 in 5min
+const resendEmailLimiter = createRateLimiter(5, 5); // 5 in 5min
+const requestPasswordLimiter = createRateLimiter(5, 5); // 5 in 5min
+const resetPasswordLimiter = createRateLimiter(5, 5); // 5 in 5min
 
 export function createAuthenticationRouter(
   deps: AuthenticationRouterDependencies,
@@ -97,6 +107,7 @@ export function createAuthenticationRouter(
 
   router.get(
     '/public/check-auth',
+    checkAuthLimiter,
     deps.isAuthenticated,
     async (req: Request, res: Response, next: NextFunction) => {
       type TCheckAuthClientResponse = {
@@ -140,6 +151,7 @@ export function createAuthenticationRouter(
 
   router.post(
     '/public/register',
+    registerLimiter,
     async (req: Request, res: Response, next: NextFunction) => {
       type TRegisterClientResponse = {
         success: boolean;
@@ -183,6 +195,7 @@ export function createAuthenticationRouter(
 
   router.post(
     '/public/login',
+    loginLimiter,
     async (req: Request, res: Response, next: NextFunction) => {
       type TLoginClientResponse = {
         success: boolean;
@@ -232,6 +245,7 @@ export function createAuthenticationRouter(
 
   router.post(
     '/public/logout',
+    logoutLimiter,
     deps.isAuthenticated,
     async (req: Request, res: Response, next: NextFunction) => {
       type TLogoutClientResponse = {
@@ -272,6 +286,7 @@ export function createAuthenticationRouter(
 
   router.post(
     '/public/verify-email',
+    verifyEmailLimiter,
     async (req: Request, res: Response, next: NextFunction) => {
       type TVerifyEmailClientResponse = {
         success: boolean;
@@ -317,6 +332,7 @@ export function createAuthenticationRouter(
 
   router.post(
     '/public/resend-email-verification',
+    resendEmailLimiter,
     async (req: Request, res: Response, next: NextFunction) => {
       type TResendEmailVerificationClientResponse = {
         success: boolean;
@@ -362,6 +378,7 @@ export function createAuthenticationRouter(
 
   router.post(
     '/public/request-password-reset',
+    requestPasswordLimiter,
     async (req: Request, res: Response, next: NextFunction) => {
       type TRequestPasswordResetClientResponse = {
         success: boolean;
@@ -407,6 +424,7 @@ export function createAuthenticationRouter(
 
   router.post(
     '/public/reset-password',
+    resetPasswordLimiter,
     async (req: Request, res: Response, next: NextFunction) => {
       type TResetPasswordClientResponse = {
         success: boolean;
