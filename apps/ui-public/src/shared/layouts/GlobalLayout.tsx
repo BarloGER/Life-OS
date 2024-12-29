@@ -18,7 +18,7 @@ export const GlobalLayout = () => {
     const path = location.pathname;
     const isExceptionPath =
       path === '/' ||
-      path === '/forgot-password' ||
+      path === '/reset-password' ||
       path === '/verify-email' ||
       path === '/resend-email-verification' ||
       path === '/register' ||

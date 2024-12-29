@@ -32,7 +32,7 @@ export class NotificationService implements INotificationService {
   ): Promise<EmailVerificationMailResponse> {
     try {
       console.log(
-        `Email with password reset token ${passwordResetToken} successfuly send to ${emailAddress}`,
+        `https://localhost:4200/reset-password?token=${passwordResetToken}`,
       );
 
       return {

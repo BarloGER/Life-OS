@@ -109,6 +109,22 @@
       "errors": {
         "invalidCredentials": "Ungültige Anmeldedaten"
       }
+    },
+
+    "resetPassword": {
+      "title": "Passwort Zurücksetzen",
+      "labels": {
+        "password": "Neues Passwort",
+        "requestPasswordResetLink": "Keine Email erhalten?",
+        "submit": "Absenden"
+      },
+      "placeholders": {
+        "password": "Passwort"
+      },
+      "success": "Dein Passwort wurde erfolgreich geändert. Du kannst dich jetzt anmelden.",
+      "errors": {
+        "unknownError": "Es ist ein Fehler aufgetreten. Hast du dein Passwort schon zurückgesetzt? Wenn nicht, kannst du über den Link eine neue Email anfordern."
+      }
     }
   },
 

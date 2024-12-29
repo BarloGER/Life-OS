@@ -26,16 +26,16 @@ type AuthenticationRouterDependencies = {
 };
 
 export function createAuthenticationRouter(
-  deps: AuthenticationRouterDependencies
+  deps: AuthenticationRouterDependencies,
 ) {
   const publicAuthenitcationRepository = new PublicAuthenticationRepository(
-    deps.pgClient
+    deps.pgClient,
   );
   const publicAuthenticationPresenter = new PublicAuthenticationPresenter();
 
   const publicCheckAuthUsecase = new PublicCheckAuthUsecase(
     publicAuthenitcationRepository,
-    publicAuthenticationPresenter
+    publicAuthenticationPresenter,
   );
 
   const publicRegisterUsecase = new PublicRegisterUsecase(
@@ -43,7 +43,7 @@ export function createAuthenticationRouter(
     deps.passwordHasher,
     deps.tokenGenerator,
     publicAuthenitcationRepository,
-    publicAuthenticationPresenter
+    publicAuthenticationPresenter,
   );
 
   const publicLoginUsecase = new PublicLoginUsecase(
@@ -51,12 +51,12 @@ export function createAuthenticationRouter(
     deps.passwordHasher,
     deps.tokenGenerator,
     publicAuthenitcationRepository,
-    publicAuthenticationPresenter
+    publicAuthenticationPresenter,
   );
 
   const publicVerifyEmailUsecase = new PublicVerifyEmailUsecase(
     publicAuthenitcationRepository,
-    publicAuthenticationPresenter
+    publicAuthenticationPresenter,
   );
 
   const publicResendEmailVerificationUsecase =
@@ -65,7 +65,7 @@ export function createAuthenticationRouter(
       deps.passwordHasher,
       deps.tokenGenerator,
       publicAuthenitcationRepository,
-      publicAuthenticationPresenter
+      publicAuthenticationPresenter,
     );
 
   const publicRequestPasswordResetUsecase =
@@ -74,13 +74,13 @@ export function createAuthenticationRouter(
       deps.passwordHasher,
       deps.tokenGenerator,
       publicAuthenitcationRepository,
-      publicAuthenticationPresenter
+      publicAuthenticationPresenter,
     );
 
   const publicResetPasswordUsecase = new PublicResetPasswordUsecase(
     deps.passwordHasher,
     publicAuthenitcationRepository,
-    publicAuthenticationPresenter
+    publicAuthenticationPresenter,
   );
 
   const publicAuthenticationController = new PublicAuthenticationController(
@@ -90,7 +90,7 @@ export function createAuthenticationRouter(
     publicVerifyEmailUsecase,
     publicResendEmailVerificationUsecase,
     publicRequestPasswordResetUsecase,
-    publicResetPasswordUsecase
+    publicResetPasswordUsecase,
   );
 
   const router = Router();
@@ -135,7 +135,7 @@ export function createAuthenticationRouter(
         console.log('Router error', error);
         next(error);
       }
-    }
+    },
   );
 
   router.post(
@@ -148,7 +148,7 @@ export function createAuthenticationRouter(
 
       try {
         await publicAuthenticationController.handleRegistrationRequest(
-          req.body
+          req.body,
         );
 
         const response = publicAuthenticationPresenter.getRegistrationResult();
@@ -178,7 +178,7 @@ export function createAuthenticationRouter(
       } catch (error) {
         next(error);
       }
-    }
+    },
   );
 
   router.post(
@@ -227,7 +227,7 @@ export function createAuthenticationRouter(
         console.log('Router error', error);
         next(error);
       }
-    }
+    },
   );
 
   router.post(
@@ -272,7 +272,7 @@ export function createAuthenticationRouter(
       } catch (error) {
         next(error);
       }
-    }
+    },
   );
 
   router.post(
@@ -285,7 +285,7 @@ export function createAuthenticationRouter(
 
       try {
         await publicAuthenticationController.handleResendEmailVerificationRequest(
-          req.body
+          req.body,
         );
 
         const response =
@@ -317,7 +317,7 @@ export function createAuthenticationRouter(
         console.log('Router error', error);
         next(error);
       }
-    }
+    },
   );
 
   router.post(
@@ -330,7 +330,7 @@ export function createAuthenticationRouter(
 
       try {
         await publicAuthenticationController.handleRequestPasswordResetRequest(
-          req.body
+          req.body,
         );
 
         const response =
@@ -362,7 +362,7 @@ export function createAuthenticationRouter(
         console.log('Router error', error);
         next(error);
       }
-    }
+    },
   );
 
   router.post(
@@ -373,10 +373,14 @@ export function createAuthenticationRouter(
         errorCode?: string;
       };
 
+      const token = req.query.token.toString();
+      const { newPassword } = req.body;
+
       try {
-        await publicAuthenticationController.handleResetPasswordRequest(
-          req.body
-        );
+        await publicAuthenticationController.handleResetPasswordRequest({
+          passwordResetToken: token,
+          newPassword,
+        });
 
         const response = publicAuthenticationPresenter.getResetPasswordResult();
 
@@ -406,7 +410,7 @@ export function createAuthenticationRouter(
         console.log('Router error', error);
         next(error);
       }
-    }
+    },
   );
 
   return router;

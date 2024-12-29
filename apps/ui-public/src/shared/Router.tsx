@@ -5,6 +5,7 @@ import {
   LoginPage,
   RegisterPage,
   ResendEmailVerificationPage,
+  ResetPasswordPage,
   VerifyEmailPage,
 } from '@features/authentication/components/pages';
 
@@ -21,6 +22,7 @@ export const Router = () => {
             path="/resend-email-verification"
             element={<ResendEmailVerificationPage />}
           />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
