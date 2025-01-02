@@ -5,72 +5,45 @@ export class Password {
     this.password = password;
   }
 
-  /**
-   * Erstellt ein Password-Objekt für die Registrierung nach strengen Anforderungen.
-   */
   static createForRegistration(password: string): Password {
-    if (!this.isValidForRegistration(password)) {
-      throw new Error('authentication.registerUser.errors.invalidInput');
+    if (typeof password !== 'string') {
+      throw new Error('valueObjects.password.notAString');
     }
-    return new Password(password);
-  }
-
-  /**
-   * Erstellt ein Password-Objekt für den Login nach minimalen Anforderungen.
-   */
-  static createForLogin(password: string): Password {
-    if (!this.isValidForLogin(password)) {
-      throw new Error('authentication.registerUser.errors.invalidInput');
+    if (password.length < 8) {
+      throw new Error('valueObjects.password.tooShort');
     }
-    return new Password(password);
-  }
-
-  /**
-   * Validiert ein Passwort basierend auf allen Registrierungsanforderungen.
-   */
-  private static isValidForRegistration(password: string): boolean {
-    return (
-      this.isString(password) &&
-      this.hasValidLength(password) &&
-      this.hasUppercase(password) &&
-      this.hasLowercase(password) &&
-      this.hasNumber(password) &&
-      this.hasSpecialCharacter(password)
-    );
-  }
-
-  /**
-   * Validiert ein Passwort basierend auf den minimalen Anforderungen für einen Login.
-   */
-  private static isValidForLogin(password: string): boolean {
-    return this.isString(password) && this.hasValidLength(password);
-  }
-
-  private static isString(password: string): boolean {
-    return typeof password === 'string';
-  }
-
-  private static hasValidLength(password: string): boolean {
-    const minLength = 8;
-    const maxLength = 128;
-    return password.length >= minLength && password.length <= maxLength;
-  }
-
-  private static hasUppercase(password: string): boolean {
-    return /[A-Z]/.test(password);
-  }
-
-  private static hasLowercase(password: string): boolean {
-    return /[a-z]/.test(password);
-  }
-
-  private static hasNumber(password: string): boolean {
-    return /[0-9]/.test(password);
-  }
-
-  private static hasSpecialCharacter(password: string): boolean {
+    if (password.length > 128) {
+      throw new Error('valueObjects.password.tooLong');
+    }
+    if (!/[A-Z]/.test(password)) {
+      throw new Error('valueObjects.password.noUppercase');
+    }
+    if (!/[a-z]/.test(password)) {
+      throw new Error('valueObjects.password.noLowercase');
+    }
+    if (!/[0-9]/.test(password)) {
+      throw new Error('valueObjects.password.noNumber');
+    }
     const specialCharacters = '@$!%*?&#^()_-+=';
-    return [...password].some((char) => specialCharacters.includes(char));
+    if (![...password].some((char) => specialCharacters.includes(char))) {
+      throw new Error('valueObjects.password.noSpecialChar');
+    }
+
+    return new Password(password);
+  }
+
+  static createForLogin(password: string): Password {
+    if (typeof password !== 'string') {
+      throw new Error('valueObjects.password.notAString');
+    }
+    if (password.length < 8) {
+      throw new Error('valueObjects.password.tooShort');
+    }
+    if (password.length > 128) {
+      throw new Error('valueObjects.password.tooLong');
+    }
+
+    return new Password(password);
   }
 
   getValue(): string {

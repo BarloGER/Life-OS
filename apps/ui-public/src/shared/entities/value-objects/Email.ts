@@ -2,63 +2,38 @@ export class Email {
   private readonly email: string;
 
   constructor(email: string) {
-    if (!this.isValid(email)) {
-      throw new Error('valueObjects.email.invalidInput');
+    if (typeof email !== 'string') {
+      throw new Error('valueObjects.email.notAString');
     }
-    this.email = email;
-  }
-
-  private readonly dangerousCharacters = [
-    '`',
-    "'",
-    '"',
-    ';',
-    ':',
-    '<',
-    '>',
-    '\\',
-    '/',
-  ];
-
-  private syntacticValidation(email: string): boolean {
-    if (email.length > 254 || typeof email !== 'string') {
-      return false;
+    if (email.length > 254) {
+      throw new Error('valueObjects.email.tooLong');
     }
 
-    if (this.dangerousCharacters.some((char) => email.includes(char))) {
-      return false;
+    const dangerousCharacters = ['`', "'", '"', ';', ':', '<', '>', '\\', '/'];
+    if (dangerousCharacters.some((char) => email.includes(char))) {
+      throw new Error('valueObjects.email.illegalCharacters');
     }
 
-    // Split into local and domain part, local part is everything before @
     const [localPart, domain] = email.split('@');
     if (!localPart || !domain) {
-      return false;
+      throw new Error('valueObjects.email.invalidFormat');
     }
-
     if (localPart.length > 63) {
-      return false;
+      throw new Error('valueObjects.email.invalidFormat');
     }
-
-    // Domain contains only alphanumeric charcters, "." and "-"
     const domainRegex = /^[a-zA-Z0-9.-]+$/;
     if (!domainRegex.test(domain)) {
-      return false;
+      throw new Error('valueObjects.email.invalidFormat');
     }
-
-    // Check if domain is valid
     if (
       domain.startsWith('-') ||
       domain.endsWith('-') ||
       domain.includes('..')
     ) {
-      return false;
+      throw new Error('valueObjects.email.invalidFormat');
     }
 
-    return true;
-  }
-
-  private isValid(email: string): boolean {
-    return this.syntacticValidation(email);
+    this.email = email;
   }
 
   getValue(): string {

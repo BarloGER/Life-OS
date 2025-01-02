@@ -2,26 +2,24 @@ export class Token {
   private readonly token: string;
 
   constructor(token: string) {
-    if (!this.isValid(token)) {
-      throw new Error('authentication.verifyEmail.errors.invalidInput');
-    }
-    this.token = token;
-  }
-
-  private isValid(token: string): boolean {
     if (typeof token !== 'string') {
-      return false;
+      throw new Error('valueObjects.token.notAString');
     }
 
-    const minLength = 8;
-    const maxLength = 32;
-    const regex = /^[A-Z0-9]+$/;
+    if (token.length < 8) {
+      throw new Error('valueObjects.token.tooShort');
+    }
 
-    return (
-      token.length >= minLength &&
-      token.length <= maxLength &&
-      regex.test(token)
-    );
+    if (token.length > 32) {
+      throw new Error('valueObjects.token.tooLong');
+    }
+
+    const regex = /^[A-Z0-9]+$/;
+    if (!regex.test(token)) {
+      throw new Error('valueObjects.token.invalidCharacters');
+    }
+
+    this.token = token;
   }
 
   getValue(): string {

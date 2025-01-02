@@ -2,15 +2,13 @@ export class Terms {
   private readonly termsAcceptedAt: Date;
 
   constructor(termsAccepted: boolean) {
-    if (!this.isValid(termsAccepted)) {
-      throw new Error('authentication.registerUser.errors.invalidInput');
+    if (typeof termsAccepted !== 'boolean') {
+      throw new Error('valueObjects.terms.notBoolean');
     }
-
+    if (!termsAccepted) {
+      throw new Error('valueObjects.terms.notAccepted');
+    }
     this.termsAcceptedAt = new Date();
-  }
-
-  private isValid(termsAccepted: boolean): boolean {
-    return termsAccepted === true;
   }
 
   getDate(): Date {

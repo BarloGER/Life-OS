@@ -2,21 +2,17 @@ export class UserId {
   private readonly userId: string;
 
   constructor(userId: string) {
-    if (!this.isValid(userId)) {
-      throw new Error('authentication.errors.invalidInput');
+    if (typeof userId !== 'string') {
+      throw new Error('valueObjects.userId.notAString');
+    }
+    if (userId.length > 36) {
+      throw new Error('valueObjects.userId.tooLong');
+    }
+    const regex = /^[a-z0-9-]+$/;
+    if (!regex.test(userId)) {
+      throw new Error('valueObjects.userId.invalidCharacters');
     }
     this.userId = userId;
-  }
-
-  private isValid(userId: string): boolean {
-    if (typeof userId !== 'string') {
-      return false;
-    }
-
-    const maxLength = 36;
-    const regex = /^[a-z0-9-]+$/;
-
-    return userId.length <= maxLength && regex.test(userId);
   }
 
   getValue(): string {

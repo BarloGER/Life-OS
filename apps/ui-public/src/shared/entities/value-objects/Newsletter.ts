@@ -2,14 +2,11 @@ export class Newsletter {
   private readonly isNewsletterAccepted: boolean;
 
   constructor(isNewsletterAccepted: boolean) {
-    if (!this.isValid(isNewsletterAccepted)) {
-      throw Error('authentication.registerUser.errors.invalidInput');
+    if (typeof isNewsletterAccepted !== 'boolean') {
+      throw new Error('valueObjects.newsletter.notBoolean');
     }
-    this.isNewsletterAccepted = isNewsletterAccepted;
-  }
 
-  private isValid(isNewsletterAccepted: boolean): boolean {
-    return typeof isNewsletterAccepted === 'boolean';
+    this.isNewsletterAccepted = isNewsletterAccepted;
   }
 
   getValue(): boolean {
