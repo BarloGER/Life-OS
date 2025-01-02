@@ -57,6 +57,7 @@
         "username": "Benutzername",
         "email": "E-Mail",
         "password": "Passwort",
+        "confirmPassword": "Passwort Bestätigen",
         "newsletter": "Newsletter akzeptieren",
         "terms": "Nutzungsbedingungen akzeptieren",
         "loginLink": "Bereits registriert?",
@@ -67,7 +68,11 @@
         "email": "E-Mail",
         "password": "Passwort"
       },
-      "success": "Es wurde eine Bestätigungslink an die hinterlegte E-Mail Adresse gesendet. Bitte überprüfe dein Postfach."
+      "success": "Es wurde eine Bestätigungslink an die hinterlegte E-Mail Adresse gesendet. Bitte überprüfe dein Postfach.",
+      "errors": {
+        "invalidInput": "Ungültige Eingabe",
+        "passwordMatch": "Die Passwörter stimmen nicht überein."
+      }
     },
 
     "verifyEmail": {
@@ -104,9 +109,10 @@
     },
 
     "resetPassword": {
-      "title": "Neues Passwort festlegen",
+      "title": "Neues Passwort Festlegen",
       "labels": {
         "password": "Neues Passwort",
+        "confirmPassword": "Passwort Bestätigen",
         "requestPasswordResetLink": "Keine Email erhalten?",
         "submit": "Absenden"
       },
@@ -115,6 +121,7 @@
       },
       "success": "Dein Passwort wurde erfolgreich geändert. Du kannst dich jetzt anmelden.",
       "errors": {
+        "passwordMatch": "Die Passwörter stimmen nicht überein.",
         "unknownError": "Es ist ein Fehler aufgetreten. Hast du dein Passwort schon zurückgesetzt? Wenn nicht, kannst du über den Link eine neue Email anfordern."
       }
     },

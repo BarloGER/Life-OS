@@ -7,6 +7,7 @@ import { Password, Token } from '@shared/entities/index';
 
 interface ResetPasswordFormData {
   password: string;
+  confirmPassword: string;
 }
 
 type ResetPasswordResponse = {
@@ -20,11 +21,13 @@ export const ResetPasswordPage = () => {
   const [resetPasswordFormData, setResetPasswordFormData] =
     useState<ResetPasswordFormData>({
       password: '',
+      confirmPassword: '',
     });
   const [isLoading, setIsLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState('');
   const [searchParams] = useSearchParams();
   const token = searchParams.get('token');
 
@@ -91,6 +94,15 @@ export const ResetPasswordPage = () => {
       return;
     }
 
+    if (resetPasswordFormData.confirmPassword !== validPassword.getValue()) {
+      setIsLoading(false);
+      setPasswordError(t('authentication.resetPassword.errors.passwordMatch'));
+      setConfirmPasswordError(
+        t('authentication.resetPassword.errors.passwordMatch'),
+      );
+      return;
+    }
+
     const resetPasswordResponse = await resetPasswordRequest({
       token: validToken.getValue(),
       newPassword: validPassword.getValue(),
@@ -130,6 +142,7 @@ export const ResetPasswordPage = () => {
           isLoading={isLoading}
           errorMessage={errorMessage}
           passwordError={passwordError}
+          confirmPasswordError={confirmPasswordError}
           successMessage={successMessage}
         />
       </section>

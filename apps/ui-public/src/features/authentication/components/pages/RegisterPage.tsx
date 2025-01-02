@@ -19,6 +19,7 @@ interface RegisterFormData {
   username: string;
   email: string;
   password: string;
+  confirmPassword: string;
   isNewsletterAccepted: boolean;
   isTermsAccepted: boolean;
 }
@@ -38,6 +39,7 @@ export const RegisterPage = () => {
     username: '',
     email: '',
     password: '',
+    confirmPassword: '',
     isNewsletterAccepted: false,
     isTermsAccepted: false,
   });
@@ -47,6 +49,7 @@ export const RegisterPage = () => {
   const [usernameError, setUsernameError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState('');
   const [newsletterError, setNewsletterError] = useState('');
   const [termsError, setTermsError] = useState('');
 
@@ -109,6 +112,7 @@ export const RegisterPage = () => {
     setUsernameError('');
     setEmailError('');
     setPasswordError('');
+    setConfirmPasswordError('');
     setNewsletterError('');
     setTermsError('');
 
@@ -145,6 +149,15 @@ export const RegisterPage = () => {
         setIsRegisterLoading(false);
         setPasswordError(t(`${err.message}`));
       }
+      return;
+    }
+
+    if (registerFormData.confirmPassword !== validPassword.getValue()) {
+      setIsRegisterLoading(false);
+      setPasswordError(t('authentication.register.errors.passwordMatch'));
+      setConfirmPasswordError(
+        t('authentication.register.errors.passwordMatch'),
+      );
       return;
     }
 
@@ -214,6 +227,7 @@ export const RegisterPage = () => {
           usernameError={usernameError}
           emailError={emailError}
           passwordError={passwordError}
+          confirmPasswordError={confirmPasswordError}
           newsletterError={newsletterError}
           termsError={termsError}
         />

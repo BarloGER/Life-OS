@@ -14,6 +14,7 @@ interface RegisterFormProps {
     username: string;
     email: string;
     password: string;
+    confirmPassword: string;
     isNewsletterAccepted: boolean;
     isTermsAccepted: boolean;
   };
@@ -25,6 +26,7 @@ interface RegisterFormProps {
   usernameError: string;
   emailError: string;
   passwordError: string;
+  confirmPasswordError: string;
   newsletterError: string;
   termsError: string;
 }
@@ -39,6 +41,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
   usernameError,
   emailError,
   passwordError,
+  confirmPasswordError,
   newsletterError,
   termsError,
 }) => {
@@ -75,6 +78,15 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
         value={registerFormData.password}
         onChange={handleChange}
         error={passwordError}
+      />
+
+      <PasswordInputField
+        name="confirmPassword"
+        label={t('authentication.register.labels.confirmPassword')}
+        placeholder={t('authentication.register.placeholders.password')}
+        value={registerFormData.confirmPassword}
+        onChange={handleChange}
+        error={confirmPasswordError}
       />
 
       <CheckboxField

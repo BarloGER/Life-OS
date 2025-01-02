@@ -7,6 +7,7 @@ import './assets/reset-password-form.css';
 interface ResetPasswordFormProps {
   resetPasswordFormData: {
     password: string;
+    confirmPassword: string;
   };
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   processResetPassword: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -14,6 +15,7 @@ interface ResetPasswordFormProps {
   successMessage: string;
   errorMessage: string;
   passwordError: string;
+  confirmPasswordError: string;
 }
 
 export const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
@@ -24,6 +26,7 @@ export const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
   successMessage,
   errorMessage,
   passwordError,
+  confirmPasswordError,
 }) => {
   const { t } = useTranslation();
 
@@ -38,6 +41,15 @@ export const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
         value={resetPasswordFormData.password}
         onChange={handleChange}
         error={passwordError}
+      />
+
+      <PasswordInputField
+        name="confirmPassword"
+        label={t('authentication.resetPassword.labels.confirmPassword')}
+        placeholder={t('authentication.resetPassword.placeholders.password')}
+        value={resetPasswordFormData.confirmPassword}
+        onChange={handleChange}
+        error={confirmPasswordError}
       />
 
       {errorMessage && <ErrorMessage message={errorMessage} />}
