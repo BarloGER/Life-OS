@@ -45,6 +45,9 @@ export const VerifyEmailPage = () => {
     async (token: string) => {
       setIsLoading(true);
 
+      setSuccessMessage('');
+      setErrorMessage('');
+
       let validToken: Token;
       try {
         validToken = new Token(token);

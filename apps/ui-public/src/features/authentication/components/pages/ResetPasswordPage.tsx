@@ -70,6 +70,11 @@ export const ResetPasswordPage = () => {
     e.preventDefault();
     setIsLoading(true);
 
+    setSuccessMessage('');
+    setErrorMessage('');
+    setPasswordError('');
+    setConfirmPasswordError('');
+
     let validToken: Token;
     try {
       validToken = new Token(token);

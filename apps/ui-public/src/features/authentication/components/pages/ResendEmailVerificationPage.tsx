@@ -70,6 +70,7 @@ export const ResendEmailVerificationPage = () => {
     e.preventDefault();
     setIsLoading(true);
 
+    setSuccessMessage('');
     setErrorMessage('');
     setEmailError('');
     setPasswordError('');

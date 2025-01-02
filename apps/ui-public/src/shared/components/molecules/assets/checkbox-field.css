@@ -3,22 +3,13 @@
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  margin-bottom: 5px;
+  margin: 1rem 0;
 }
 
 .checkbox-field__label {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 0.5rem;
   font-size: var(--font-xs);
   cursor: pointer;
-}
-
-.checkbox-field__container > .error-text {
-  width: 100%;
-  color: var(--color-error);
-  padding: 10px;
-  border: 1px solid var(--color-error);
-  font-size: var(--font-xs);
-  margin-top: 5px;
 }

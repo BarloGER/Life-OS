@@ -8,6 +8,24 @@
     }
   },
 
+  "shared": {
+    "components": {
+      "atoms": {
+        "modal": {
+          "close": "Schließen"
+        }
+      },
+      "molecules": {
+        "passwordInputField": {
+          "passwordStrength": "Passwort Stärke: ",
+          "weak": "Schwach",
+          "moderate": "Moderat",
+          "strong": "Stark"
+        }
+      }
+    }
+  },
+
   "landingPage": {
     "hero": {
       "title": "Willkommen bei Lockify",
@@ -72,6 +90,20 @@
         "username": "Benutzername",
         "email": "E-Mail",
         "password": "Passwort"
+      },
+      "modals": {
+        "username": {
+          "title": "Ein gültiger Benutzername sieht wie folgt aus:",
+          "length": "Er muss zwischen 3 und 30 Zeichen lang sein",
+          "illegalChars": "Er darf nur aus alphanumerischen Zeichen, - und _ bestehen"
+        },
+        "password": {
+          "title": "Ein sicheres Passwort sieht wie folgt aus aus:",
+          "length": "Mindestens 8 Zeichen lang",
+          "letters": "Enthält Groß- und Kleinbuchstaben",
+          "number": "Enthält Zahlen",
+          "specialChar": "Enthält Sonderzeichen"
+        }
       },
       "success": "Es wurde eine Bestätigungslink zum aktivieren deines Benutzerkontos, an die hinterlegte E-Mail Adresse gesendet.",
       "errors": {

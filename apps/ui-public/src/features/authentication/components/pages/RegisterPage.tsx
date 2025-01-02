@@ -108,6 +108,7 @@ export const RegisterPage = () => {
     e.preventDefault();
     setIsRegisterLoading(true);
 
+    setSuccessMessage('');
     setErrorMessage('');
     setUsernameError('');
     setEmailError('');

@@ -9,7 +9,7 @@
   width: 100%;
   z-index: 1000;
   min-height: 50px;
-  color: var(--color-button-text);
+  color: var(--color-text);
 }
 
 .nav-bar__container {
@@ -26,6 +26,7 @@
   display: flex;
   align-items: center;
   gap: 0.2rem;
+  color: var(--color-text);
 }
 
 .nav-bar__button {
@@ -33,7 +34,7 @@
   border: none;
   font-size: var(--font-xs);
   cursor: pointer;
-  color: var(--color-button-text);
+  color: var(--color-text);
 }
 
 .nav-bar__logout {
@@ -49,11 +50,6 @@
   font-size: var(--font-sm);
   padding: 0.5rem;
 }
-
-/* .nav-bar__link:hover,
-.nav-bar__button:hover {
-  background-color: var(--color-button-hover);
-} */
 
 .nav-bar__link.active {
   color: var(--color-button);

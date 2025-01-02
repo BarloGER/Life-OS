@@ -57,7 +57,7 @@ export const LoginPage = () => {
           },
           body: JSON.stringify(data),
           credentials: 'include',
-        }
+        },
       );
       return (await response.json()) as LoginResponse;
     } catch (error) {
@@ -81,6 +81,7 @@ export const LoginPage = () => {
     e.preventDefault();
     setIsLoginLoading(true);
 
+    setSuccessMessage('');
     setErrorMessage('');
     setEmailError('');
     setPasswordError('');

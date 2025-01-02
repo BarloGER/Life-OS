@@ -1,3 +1,5 @@
+import './assets/error-text.css';
+
 type ErrorTextProps = {
   children: React.ReactNode;
 };

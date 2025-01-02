@@ -20,7 +20,7 @@
   --color-background: light-dark(#f7f9fc, #1c2029);
   --color-background-secondary: light-dark(#dce0e8, #2b3348);
   --color-component-background: light-dark(#9ba4b4, #252c41);
-  --color-text: light-dark(#2e3440, #d1d1d1);
+  --color-text: light-dark(#2e3440, #fff);
   --color-text-secondary: light-dark(#4c566a, #a3a3a3);
   --color-button: light-dark(#007bff, #1a74af);
   --color-button-text: light-dark(#ffffff, #d1d1d1);
@@ -73,14 +73,17 @@ body {
   margin: 0;
 }
 
-ol,
+ol {
+  list-style-position: inside;
+}
+
 ul {
   list-style: none;
 }
 
 a {
   text-decoration: none;
-  color: var(--color-button-text);
+  color: var(--color-text);
 }
 
 input {

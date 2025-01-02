@@ -1,16 +1,19 @@
-import { useTranslation } from 'react-i18next';
 import { FaSpinner } from 'react-icons/fa';
 import './assets/submit-button.css';
 
-export const SubmitButton = ({
+type SubmitButtonProps = {
+  children: string;
+  isLoading: boolean;
+  className?: string;
+  modifier?: string;
+};
+
+export const SubmitButton: React.FC<SubmitButtonProps> = ({
   children,
   isLoading,
-  type = 'submit',
   className = 'submit-button',
   modifier = 'hover',
 }) => {
-  const { t } = useTranslation();
-
   const buttonClass = `submit-button ${
     modifier ? `submit-button--${modifier}` : ''
   } ${className}`;

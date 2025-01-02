@@ -59,6 +59,18 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
         onChange={handleChange}
         error={usernameError}
         type="text"
+        infoModalContent={
+          <div>
+            <p>{t('authentication.register.modals.username.title')}</p>
+            <br />
+            <ol>
+              <li>{t('authentication.register.modals.username.length')}</li>
+              <li>
+                {t('authentication.register.modals.username.illegalChars')}
+              </li>
+            </ol>
+          </div>
+        }
       />
 
       <InputField
@@ -73,11 +85,26 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
 
       <PasswordInputField
         name="password"
-        label={t('authentication.register.labels.password')}
-        placeholder={t('authentication.register.placeholders.password')}
+        label="Password"
+        placeholder="Enter your password"
         value={registerFormData.password}
         onChange={handleChange}
         error={passwordError}
+        showStrength
+        infoModalContent={
+          <div>
+            <p>{t('authentication.register.modals.password.title')}</p>
+            <br />
+            <ol>
+              <li>{t('authentication.register.modals.password.length')}</li>
+              <li>{t('authentication.register.modals.password.letters')}</li>
+              <li>{t('authentication.register.modals.password.number')}</li>
+              <li>
+                {t('authentication.register.modals.password.specialChar')}
+              </li>
+            </ol>
+          </div>
+        }
       />
 
       <PasswordInputField

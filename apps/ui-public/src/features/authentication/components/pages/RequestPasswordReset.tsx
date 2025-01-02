@@ -64,6 +64,7 @@ export const RequestPasswordResetPage = () => {
     e.preventDefault();
     setIsLoading(true);
 
+    setSuccessMessage('');
     setErrorMessage('');
     setEmailError('');
 

@@ -2,7 +2,7 @@ import { Checkbox, Label, ErrorText } from '../atoms';
 import './assets/checkbox-field.css';
 
 type CheckboxFieldProps = {
-  name: string; // <-- neu
+  name: string;
   label: string;
   checked: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
