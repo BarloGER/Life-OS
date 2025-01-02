@@ -31,8 +31,8 @@ const registerLimiter = createRateLimiter(5, 5); // 5 in 5min
 const loginLimiter = createRateLimiter(5, 5); // 5 in 5min
 const logoutLimiter = createRateLimiter(5, 5); // 5 in 5min
 const verifyEmailLimiter = createRateLimiter(5, 5); // 5 in 5min
-const resendEmailLimiter = createRateLimiter(5, 5); // 5 in 5min
-const requestPasswordLimiter = createRateLimiter(5, 5); // 5 in 5min
+const resendEmailLimiter = createRateLimiter(2, 15); // 2 in 15min
+const requestPasswordLimiter = createRateLimiter(2, 15); // 2 in 15min
 const resetPasswordLimiter = createRateLimiter(5, 5); // 5 in 5min
 
 export function createAuthenticationRouter(
@@ -234,16 +234,27 @@ export function createAuthenticationRouter(
           return;
         }
 
-        const userRole = response.user.role;
-        const sessionDuration =
-          sessionDurations[userRole] || sessionDurations['guest']; // Standard for guests
+        // Regenerate session to avoid session fixation
+        req.session.regenerate((err) => {
+          if (err) {
+            console.error('Session regenerate error:', err);
+            return res.status(500).json({
+              success: false,
+              errorCode: 'authentication.login.errors.sessionRegenerateFailed',
+            });
+          }
 
-        req.session.userId = response.user.id;
-        req.session.role = response.user.role;
-        req.session.status = response.user.status;
-        req.session.cookie.maxAge = sessionDuration;
+          const userRole = response.user.role;
+          const sessionDuration =
+            sessionDurations[userRole] || sessionDurations['guest'];
 
-        res.status(201).json(response);
+          req.session.userId = response.user.id;
+          req.session.role = response.user.role;
+          req.session.status = response.user.status;
+          req.session.cookie.maxAge = sessionDuration;
+
+          res.status(201).json(response);
+        });
       } catch (error) {
         console.log('Router error', error);
         next(error);
