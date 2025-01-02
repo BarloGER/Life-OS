@@ -29,11 +29,11 @@ export class PublicLoginUsecase implements IPublicLoginInputPort {
         validEmail = new Email(requestModel.email);
         validPassword = Password.createForLogin(requestModel.password);
       } catch (error) {
+        console.error(error);
         return this.outputPort.presentLoginResult({
           success: false,
           internalMessage: 'Validation error occurred in entities',
-          errorCode:
-            error.message || 'authentication.login.errors.unknownError',
+          errorCode: 'authentication.login.errors.loginFailed',
           user: null,
         });
       }
@@ -44,31 +44,13 @@ export class PublicLoginUsecase implements IPublicLoginInputPort {
           validEmail.getValue(),
         );
       } catch (error) {
+        console.error(error);
         return this.outputPort.presentLoginResult({
           success: false,
           internalMessage: 'Database error while finding user',
-          errorCode:
-            error.message || 'authentication.login.errors.unknownError',
+          errorCode: 'authentication.login.errors.loginFailed',
           user: null,
         });
-      }
-
-      if (foundUser.status !== 'active') {
-        throw Error('authentication.login.errors.accountNotActive');
-      }
-
-      if (!foundUser.isEmailVerified) {
-        throw Error('authentication.login.errors.emailNotVerified');
-      }
-
-      if (foundUser.lockedUntil && foundUser.lockedUntil > new Date()) {
-        throw Error('authentication.login.errors.accountLocked');
-      } else if (foundUser.lockedUntil) {
-        await this.repository.unlockUserAccount(foundUser.id);
-        this.notificationService.sendUnblockNoticeMail(
-          foundUser.email,
-          requestModel.language,
-        );
       }
 
       let isPasswordValid: boolean;
@@ -90,22 +72,40 @@ export class PublicLoginUsecase implements IPublicLoginInputPort {
               foundUser.email,
               requestModel.language,
             );
-            throw Error('authentication.login.errors.accountLocked');
+            throw Error('authentication.login.errors.loginFailed');
           }
 
-          throw Error('authentication.login.errors.invalidCredentials');
+          throw Error('authentication.login.errors.loginFailed');
         }
       } catch (error) {
+        console.error(error);
         return this.outputPort.presentLoginResult({
           success: false,
           internalMessage: 'Database error while finding user',
-          errorCode:
-            error.message || 'authentication.login.errors.unknownError',
+          errorCode: 'authentication.login.errors.loginFailed',
           user: null,
         });
       }
 
       await this.repository.resetFailedLoginAttempts(foundUser.id);
+
+      if (foundUser.status === 'pending_verification') {
+        throw Error('authentication.login.errors.pendingVerification');
+      }
+
+      if (foundUser.status !== 'active') {
+        throw Error('authentication.login.errors.loginFailed');
+      }
+
+      if (foundUser.lockedUntil && foundUser.lockedUntil > new Date()) {
+        throw Error('authentication.login.errors.loginFailed');
+      } else if (foundUser.lockedUntil) {
+        await this.repository.unlockUserAccount(foundUser.id);
+        this.notificationService.sendUnblockNoticeMail(
+          foundUser.email,
+          requestModel.language,
+        );
+      }
 
       // Get updated user
       const updatedUser = await this.repository.findUserById(foundUser.id);
@@ -117,11 +117,11 @@ export class PublicLoginUsecase implements IPublicLoginInputPort {
         user: updatedUser,
       });
     } catch (error) {
+      console.error(error.message);
       return this.outputPort.presentLoginResult({
         success: false,
         internalMessage: 'Unexpected error in use case',
-        errorCode:
-          error.message || 'authentication.login.errors.unexpectedError',
+        errorCode: error.message || 'authentication.login.errors.loginFailed',
         user: null,
       });
     }

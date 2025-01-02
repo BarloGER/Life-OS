@@ -14,10 +14,6 @@ type PasswordInputFieldProps = {
   required?: boolean;
 };
 
-/**
- * Ein spezialisiertes Input-Feld für Passwörter, das das Umschalten
- * zwischen "password"- und "text"-Anzeige ermöglicht.
- */
 export const PasswordInputField: React.FC<PasswordInputFieldProps> = ({
   name,
   label,

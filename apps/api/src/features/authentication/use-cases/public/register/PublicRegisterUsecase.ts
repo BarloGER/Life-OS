@@ -55,11 +55,11 @@ export class PublicRegisterUsecase implements IPublicRegisterInputPort {
           validPassword.getValue(),
         );
       } catch (error) {
+        console.error(error.message);
         return this.outputPort.presentRegistrationResult({
           success: false,
           internalMessage: 'Password hashing failed',
-          errorCode:
-            error.message || 'authentication.register.errors.unknownError',
+          errorCode: 'authentication.register.errors.registrationFailed',
           user: null,
         });
       }
@@ -77,11 +77,13 @@ export class PublicRegisterUsecase implements IPublicRegisterInputPort {
           TOKEN_LIFETIME,
         );
       } catch (error) {
+        console.error(error.message);
         return this.outputPort.presentRegistrationResult({
           success: false,
           internalMessage: 'Error generating email verification token',
           errorCode:
-            error.message || 'authentication.register.errors.unknownError',
+            error.message ||
+            'authentication.register.errors.registrationFailed',
           user: null,
         });
       }
@@ -98,31 +100,41 @@ export class PublicRegisterUsecase implements IPublicRegisterInputPort {
           termsAcceptedAt.getDate(),
         );
       } catch (error) {
+        console.error(error.message);
+        if (error.message.includes('usernameAlreadyExists')) {
+          return this.outputPort.presentRegistrationResult({
+            success: false,
+            internalMessage: 'Username already exists.',
+            errorCode: 'authentication.register.errors.usernameAlreadyExists',
+            user: null,
+          });
+        } else if (error.message.includes('emailAlreadyExists'))
+          // success is set to true so that an attacker cannot collect valid emails.
+          return this.outputPort.presentRegistrationResult({
+            success: true,
+            internalMessage: 'Email already exists.',
+            errorCode: null,
+            user: null,
+          });
+
         return this.outputPort.presentRegistrationResult({
           success: false,
           internalMessage: 'Database error while creating user',
-          errorCode:
-            error.message || 'authentication.register.errors.unknownError',
+          errorCode: 'authentication.register.errors.registrationFailed',
           user: null,
         });
       }
 
-      try {
-        await this.notificationService.sendEmailVerificationMail(
+      // Fire and forget to avoid increased response times, that an attacker can use to guess valid used emails
+      void this.notificationService
+        .sendEmailVerificationMail(
           user.email,
           user.emailVerificationToken,
           requestModel.language,
-        );
-      } catch (error) {
-        // No return, to proceed with success message, because user is already created
-        this.outputPort.presentRegistrationResult({
-          success: false,
-          internalMessage: 'Error while sending verification mail',
-          errorCode:
-            error.message || 'authentication.register.errors.unknownError',
-          user: null,
+        )
+        .catch((err) => {
+          console.error('Mail sending failed (async):', err);
         });
-      }
 
       return this.outputPort.presentRegistrationResult({
         success: true,
@@ -131,11 +143,11 @@ export class PublicRegisterUsecase implements IPublicRegisterInputPort {
         user: user,
       });
     } catch (error) {
+      console.error(error.message);
       return this.outputPort.presentRegistrationResult({
         success: false,
         internalMessage: 'Unexpected error in use case',
-        errorCode:
-          error.message || 'authentication.register.errors.unexpectedError',
+        errorCode: 'authentication.register.errors.registrationFailed',
         user: null,
       });
     }

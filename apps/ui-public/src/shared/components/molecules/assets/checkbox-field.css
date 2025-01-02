@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
+  margin-bottom: 5px;
 }
 
 .checkbox-field__label {
@@ -19,4 +20,5 @@
   padding: 10px;
   border: 1px solid var(--color-error);
   font-size: var(--font-xs);
+  margin-top: 5px;
 }

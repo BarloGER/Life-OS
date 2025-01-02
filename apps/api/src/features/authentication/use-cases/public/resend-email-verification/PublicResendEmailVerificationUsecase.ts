@@ -9,6 +9,10 @@ import { TPublicResendEmailVerificationRequestModel } from './TPublicResendEmail
 import { IPublicAuthenticationOutputPort } from '../IPublicAuthenticationOutputPort';
 import { IPublicAuthenticationRepository } from '../IPublicAuthenticationRepository';
 
+function delay(duration: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, duration));
+}
+
 export class PublicResendEmailVerificationUsecase
   implements IPublicResendEmailVerificationInputPort
 {
@@ -23,6 +27,8 @@ export class PublicResendEmailVerificationUsecase
   async resendEmailVerification(
     requestModel: TPublicResendEmailVerificationRequestModel,
   ): Promise<void> {
+    const startTime = Date.now();
+
     try {
       let validEmail: Email, validPassword: Password;
 
@@ -45,21 +51,28 @@ export class PublicResendEmailVerificationUsecase
           validEmail.getValue(),
         );
       } catch (error) {
-        return this.outputPort.presentResendEmailVerificationResult({
-          success: false,
-          internalMessage: 'Database error while finding user',
-          errorCode:
-            error.message ||
-            'authentication.resendEmailVerification.errors.unknownError',
-        });
+        console.error(error.message);
+        // If an user doesnt exist in the db, we set it to null to keep
+        // the function running, to get an equal response time
+        foundUser = null;
       }
 
       let isPasswordValid: boolean;
       try {
-        isPasswordValid = await this.passwordHasher.compare(
-          validPassword.getValue(),
-          foundUser.hashedPassword,
-        );
+        console.log(foundUser);
+        // Dummy hash if an user doesnt exist to keep response time equal
+        if (foundUser === null) {
+          isPasswordValid = await this.passwordHasher.compare(
+            validPassword.getValue(),
+            'dummy-hash-value-for-non-existent-user',
+          );
+        } else {
+          isPasswordValid = await this.passwordHasher.compare(
+            validPassword.getValue(),
+            foundUser.hashedPassword,
+          );
+        }
+
         if (!isPasswordValid) {
           throw Error(
             'authentication.resendEmailVerification.errors.invalidCredentials',
@@ -118,21 +131,15 @@ export class PublicResendEmailVerificationUsecase
         });
       }
 
-      try {
-        await this.notificationService.sendEmailVerificationMail(
+      void this.notificationService
+        .sendEmailVerificationMail(
           foundUser.email,
           emailVerificationTokenObj.token,
           requestModel.language,
-        );
-      } catch (error) {
-        return this.outputPort.presentResendEmailVerificationResult({
-          success: false,
-          internalMessage: 'Failed to send Email',
-          errorCode:
-            error.message ||
-            'authentication.resendEmailVerification.errors.emailError',
+        )
+        .catch((err) => {
+          console.error('Mail sending failed (async):', err);
         });
-      }
 
       return this.outputPort.presentResendEmailVerificationResult({
         success: true,
@@ -147,6 +154,9 @@ export class PublicResendEmailVerificationUsecase
           error.message ||
           'authentication.resendEmailVerification.errors.unexpectedError',
       });
+    } finally {
+      // Force same response time to avoid email collecting from an attacker
+      await delay(Math.max(0, 3000 - (Date.now() - startTime)));
     }
   }
 }

@@ -19,7 +19,6 @@ export const CheckboxField: React.FC<CheckboxFieldProps> = ({
   return (
     <div className="checkbox-field__container">
       <Label className="checkbox-field__label">
-        {/* Name mitgeben */}
         <Checkbox name={name} checked={checked} onChange={onChange} />
         {label}
       </Label>

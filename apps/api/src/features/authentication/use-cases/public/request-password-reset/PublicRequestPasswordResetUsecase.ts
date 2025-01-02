@@ -9,6 +9,10 @@ import { TPublicRequestPasswordResetRequestModel } from './TPublicRequestPasswor
 import { IPublicAuthenticationOutputPort } from '../IPublicAuthenticationOutputPort';
 import { IPublicAuthenticationRepository } from '../IPublicAuthenticationRepository';
 
+function delay(duration: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, duration));
+}
+
 export class PublicRequestPasswordResetUsecase
   implements IPublicRequestPasswordResetInputPort
 {
@@ -24,6 +28,8 @@ export class PublicRequestPasswordResetUsecase
   async requestPasswordReset(
     requestModel: TPublicRequestPasswordResetRequestModel,
   ): Promise<void> {
+    const startTime = Date.now();
+
     try {
       let validEmail: Email;
       try {
@@ -44,12 +50,13 @@ export class PublicRequestPasswordResetUsecase
           validEmail.getValue(),
         );
       } catch (error) {
+        console.error(error.message);
+        // Set success to true to keep the response equal and avoid valid email
+        // collection from an attacker
         return this.outputPort.presentRequestPasswordResetResult({
-          success: false,
+          success: true,
           internalMessage: 'Database error while finding user',
-          errorCode:
-            error.message ||
-            'authentication.requestPasswordReset.errors.unknownError',
+          errorCode: null,
         });
       }
 
@@ -92,21 +99,15 @@ export class PublicRequestPasswordResetUsecase
         });
       }
 
-      try {
-        await this.notificationService.sendPasswordResetMail(
+      void this.notificationService
+        .sendPasswordResetMail(
           foundUser.email,
           passwordResetTokenObj.token,
           requestModel.language,
-        );
-      } catch (error) {
-        return this.outputPort.presentRequestPasswordResetResult({
-          success: false,
-          internalMessage: 'Error while sending verification mail',
-          errorCode:
-            error.message ||
-            'authentication.requestPasswordReset.errors.unknownError',
+        )
+        .catch((err) => {
+          console.error('Mail sending failed (async):', err);
         });
-      }
 
       return this.outputPort.presentRequestPasswordResetResult({
         success: true,
@@ -121,6 +122,9 @@ export class PublicRequestPasswordResetUsecase
           error.message ||
           'authentication.requestPasswordReset.errors.unexpectedError',
       });
+    } finally {
+      // Force same response time to avoid email collecting from an attacker
+      await delay(Math.max(0, 3000 - (Date.now() - startTime)));
     }
   }
 }
