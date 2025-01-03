@@ -1,0 +1,24 @@
+.resend-email-verification__form {
+  width: 100%;
+  max-width: 350px;
+}
+
+.resend-email-verification__form h1 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.resend-email-verification__form .input-field__container {
+  margin-bottom: 10px;
+  font-size: var(--font-sm);
+}
+
+.resend-email-verification__link {
+  color: var(--color-button);
+  margin: 10px 0;
+  display: block;
+}
+
+.resend-email-verification__form .submit-button {
+  margin-top: 10px;
+}

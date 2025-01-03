@@ -1,0 +1,18 @@
+.landing-page-template {
+  display: flex;
+  flex-direction: column;
+}
+
+.landing-page-template__section:first-child {
+  height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing-page-template__section {
+  height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

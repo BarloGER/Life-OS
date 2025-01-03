@@ -1,0 +1,20 @@
+.authentication-template {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+}
+
+.authentication-template__section {
+  height: calc(100dvh - 50px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-width: 300px;
+}

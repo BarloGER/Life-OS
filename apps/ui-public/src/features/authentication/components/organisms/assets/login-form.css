@@ -1,0 +1,26 @@
+.login__form {
+  width: 100%;
+  max-width: 350px;
+}
+
+.login__form h1 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: var(--color-text);
+}
+
+.login__form .input-field__container {
+  margin-bottom: 10px;
+  font-size: var(--font-sm);
+}
+
+.login__link {
+  font-size: var(--font-xs);
+  color: var(--color-button);
+  margin: 10px 0;
+  display: block;
+}
+
+.login__form .submit-button {
+  margin-top: 10px;
+}

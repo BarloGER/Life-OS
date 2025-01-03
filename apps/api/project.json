@@ -5,6 +5,22 @@
   "projectType": "application",
   "tags": [],
   "targets": {
+    "build": {
+      "configurations": {
+        "development": {
+          "assets": [
+            {
+              "input": "apps/api/certs",
+              "glob": "**/*",
+              "output": "."
+            }
+          ]
+        },
+        "production": {
+          "assets": []
+        }
+      }
+    },
     "serve": {
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
