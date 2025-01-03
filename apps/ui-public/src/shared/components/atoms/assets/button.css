@@ -1,0 +1,13 @@
+.button {
+  background-color: var(--color-button);
+  color: var(--color-button-text);
+  padding: 1rem;
+  border: none;
+  cursor: pointer;
+  font-size: var(--font-sm);
+  outline: none;
+}
+
+.button--hover:hover {
+  background-color: var(--color-button-hover);
+}

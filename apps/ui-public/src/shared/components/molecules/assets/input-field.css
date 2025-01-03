@@ -1,0 +1,24 @@
+.input-field__label-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2px;
+  color: var(--color-text);
+  font-size: var(--font-md);
+}
+
+.input-field__label-container--error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2px;
+  color: var(--color-error);
+  font-size: var(--font-md);
+}
+
+.input-field__info-icon {
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: var(--color-text);
+  margin-left: 0.5rem;
+}

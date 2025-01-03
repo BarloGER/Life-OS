@@ -11,8 +11,15 @@
     "baseUrl": "./src",
     "paths": {
       "@shared/components/*": ["./shared/components/*"],
+      "@shared/configs/*": ["./shared/configs/*"],
+      "@shared/context/*": ["./shared/context/*"],
+      "@shared/entities/*": ["./shared/entities/*"],
       "@shared/layouts/*": ["./shared/layouts/*"],
-      "@shared/utils/*": ["./shared/utils/*"]
+      "@shared/utils/*": ["./shared/utils/*"],
+
+      "@features/authentication/components/*": [
+        "./features/authentication/components/*"
+      ]
     }
   },
   "exclude": [

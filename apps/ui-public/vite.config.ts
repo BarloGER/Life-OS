@@ -3,6 +3,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin';
+import fs from 'fs';
 import path from 'path';
 
 export default defineConfig({
@@ -13,14 +14,27 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './src'),
       '@shared/components': path.resolve(__dirname, './src/shared/components'),
+      '@shared/configs': path.resolve(__dirname, './src/shared/configs'),
+      '@shared/context': path.resolve(__dirname, './src/shared/context'),
+      '@shared/entities': path.resolve(__dirname, './src/shared/entities'),
       '@shared/layouts': path.resolve(__dirname, './src/shared/layouts'),
       '@shared/utils': path.resolve(__dirname, './src/shared/utils'),
+
+      '@features/authentication/components': path.resolve(
+        __dirname,
+        './src/features/authentication/components'
+      ),
     },
   },
 
   server: {
     port: 4200,
     host: '0.0.0.0',
+
+    https: {
+      key: fs.readFileSync(path.join(__dirname, 'certs', 'server.key')),
+      cert: fs.readFileSync(path.join(__dirname, 'certs', 'server.cert')),
+    },
   },
   preview: {
     port: 4300,

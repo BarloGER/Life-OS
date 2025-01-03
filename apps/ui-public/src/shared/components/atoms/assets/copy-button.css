@@ -1,0 +1,6 @@
+.copy-button {
+  background: none;
+  border: none;
+  color: var(--color-text);
+  cursor: pointer;
+}

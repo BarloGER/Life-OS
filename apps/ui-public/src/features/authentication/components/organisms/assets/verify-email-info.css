@@ -1,0 +1,15 @@
+.verify-email-info {
+  width: 90%;
+  max-width: 350px;
+}
+
+.verify-email-info h1 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.verify-email-info__link {
+  font-size: var(--font-xs);
+  color: var(--color-accent);
+  text-align: center;
+}

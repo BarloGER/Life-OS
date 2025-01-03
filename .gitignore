@@ -8,6 +8,17 @@ out-tsc
 # dependencies
 node_modules
 
+# Environment variables
+# Ignore all files that start with "env" except those ending with ".encrypted"
+.env*
+!*.encrypted
+
+# Dev cerificates
+certs
+
+# Personal Files
+TODO.md
+
 # IDEs and editors
 /.idea
 .project
@@ -42,3 +53,5 @@ Thumbs.db
 .nx/workspace-data
 
 vite.config.*.timestamp*
+
+vitest.config.*.timestamp*
