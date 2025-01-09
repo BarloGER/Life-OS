@@ -18,18 +18,18 @@ export const GlobalLayout = () => {
     const path = location.pathname;
     const isExceptionPath =
       path === '/' ||
-      path === '/reset-password' ||
-      path === '/request-password-reset' ||
-      path === '/verify-email' ||
-      path === '/resend-email-verification' ||
-      path === '/register' ||
-      path === '/support';
+      path === '/authentication/reset-password' ||
+      path === '/authentication/request-password-reset' ||
+      path === '/authentication/verify-email' ||
+      path === '/authentication/resend-email-verification' ||
+      path === '/authentication/register' ||
+      path === '/authentication/support';
 
     if (!isExceptionPath) {
       if (isBlocked) {
         navigate('/blocked');
       } else if (!isAuthenticated) {
-        navigate('/login');
+        navigate('/authentication/login');
       } else if (user && !user.isEmailVerified) {
         navigate('/confirm-email');
       }

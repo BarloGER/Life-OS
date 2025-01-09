@@ -1,0 +1,1 @@
+export { createPublicPasswordManagerRouter } from './publicPasswordManagerRouter';

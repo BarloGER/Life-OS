@@ -33,14 +33,16 @@ export const RequestPasswordResetPage = () => {
   }): Promise<RequestPasswordResetResponse> {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/auth/public/request-password-reset`,
+        `${
+          import.meta.env.VITE_API_URL
+        }/authentication/public/request-password-reset`,
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(data),
-        },
+        }
       );
       return (await response.json()) as RequestPasswordResetResponse;
     } catch (error) {
@@ -98,7 +100,7 @@ export const RequestPasswordResetPage = () => {
       setIsLoading(false);
       setErrorMessage(
         requestPasswordResetResponse.errorCode ||
-          'authentication.requestPasswordReset.failed',
+          'authentication.requestPasswordReset.failed'
       );
       return;
     }

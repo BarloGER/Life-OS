@@ -1,93 +1,127 @@
-import { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link, NavLink } from 'react-router-dom';
+import { GiHamburgerMenu } from 'react-icons/gi';
 import { AuthContext } from '@shared/context/AuthContext';
-import { NavLink } from 'react-router-dom';
+
 import './assets/nav-bar.css';
 
-export const NavBar = () => {
+export const NavBar: React.FC = () => {
   const { t, i18n } = useTranslation();
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 
-  const changeLanguage = (language: string) => {
-    i18n.changeLanguage(language);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const changeLanguage = () => {
+    const newLang = i18n.language.startsWith('en') ? 'de' : 'en';
+    i18n.changeLanguage(newLang);
   };
 
   async function logoutRequest() {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/auth/public/logout`,
+        `${import.meta.env.VITE_API_URL}/authentication/public/logout`,
         {
           method: 'POST',
           credentials: 'include',
-        },
+        }
       );
-
       return response.json();
     } catch (error) {
-      if (error instanceof Error) {
-        console.error(error);
-      }
+      console.error('Logout request failed:', error);
+      return { success: false };
     }
   }
 
   async function logout() {
     const logoutResponse = await logoutRequest();
-    if (logoutResponse.success) {
+    console.log(logoutResponse);
+    if (logoutResponse && logoutResponse.success) {
       setIsAuthenticated(false);
     }
-
-    return;
   }
+
+  const isEnglish = i18n.language.startsWith('en');
+  const flagSrc = isEnglish ? '/flag-en.svg' : '/flag-de.svg';
+  const flagAlt = isEnglish ? 'US Flag' : 'German Flag';
 
   return (
     <nav className="nav-bar">
       <div className="nav-bar__container">
         <div className="nav-bar__brand">
-          <h3>LifeOS</h3>
+          <Link to="/">
+            <h3>LifeOS</h3>
+          </Link>
         </div>
-        <div className="nav-bar__links">
-          <button
-            onClick={() => changeLanguage('en-EN')}
-            className={`${
-              i18n.language === 'en-EN'
-                ? 'nav-bar__button--active'
-                : 'nav-bar__button'
-            }`}
-          >
-            EN
-          </button>
-          <button
-            onClick={() => changeLanguage('de-DE')}
-            className={`${
-              i18n.language === 'de-DE'
-                ? 'nav-bar__button--active'
-                : 'nav-bar__button'
-            }`}
-          >
-            DE
-          </button>
+
+        <button
+          className="nav-bar__hamburger"
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+        >
+          <GiHamburgerMenu />
+        </button>
+
+        <div className={`nav-bar__links ${menuOpen ? 'open' : ''}`}>
           {isAuthenticated ? (
             <>
-              <NavLink to="/" className="nav-bar__link">
+              <NavLink
+                to="/"
+                className="nav-bar__link"
+                onClick={() => setMenuOpen(false)}
+              >
                 {t('navBar.links.home')}
               </NavLink>
-              <NavLink to="/user-profile" className="nav-bar__link">
+              <NavLink
+                to="/features"
+                className="nav-bar__link"
+                onClick={() => setMenuOpen(false)}
+              >
+                {t('navBar.links.features')}
+              </NavLink>
+              <NavLink
+                to="/user-profile"
+                className="nav-bar__link"
+                onClick={() => setMenuOpen(false)}
+              >
                 {t('navBar.links.userProfile')}
               </NavLink>
-              <button onClick={() => logout()} className="nav-bar__logout">
-                Logout
+              <button onClick={logout} className="nav-bar__logout">
+                {t('navBar.links.logout')}
               </button>
             </>
           ) : (
             <>
-              <NavLink to="/login" className="nav-bar__link">
+              <NavLink
+                to="/"
+                className="nav-bar__link"
+                onClick={() => setMenuOpen(false)}
+              >
+                {t('navBar.links.home')}
+              </NavLink>
+              <NavLink
+                to="/authentication/login"
+                className="nav-bar__link"
+                onClick={() => setMenuOpen(false)}
+              >
                 {t('navBar.links.login')}
               </NavLink>
-              <NavLink to="/register" className="nav-bar__link">
+              <NavLink
+                to="/authentication/register"
+                className="nav-bar__link"
+                onClick={() => setMenuOpen(false)}
+              >
                 {t('navBar.links.register')}
               </NavLink>
             </>
           )}
+          <button onClick={changeLanguage} className="nav-bar__flag">
+            <img src={flagSrc} alt={flagAlt} className="nav-bar__flag-img" />
+          </button>
         </div>
       </div>
     </nav>

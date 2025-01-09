@@ -37,14 +37,16 @@ export const ResendEmailVerificationPage = () => {
   }): Promise<ResendEmailVerificationResponse> {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/auth/public/resend-email-verification`,
+        `${
+          import.meta.env.VITE_API_URL
+        }/authentication/public/resend-email-verification`,
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(data),
-        },
+        }
       );
       return (await response.json()) as ResendEmailVerificationResponse;
     } catch (error) {
@@ -65,7 +67,7 @@ export const ResendEmailVerificationPage = () => {
   };
 
   const processResendEmailVerification = async (
-    e: FormEvent<HTMLFormElement>,
+    e: FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
     setIsLoading(true);
@@ -90,7 +92,7 @@ export const ResendEmailVerificationPage = () => {
 
     try {
       validPassword = Password.createForLogin(
-        resendEmailVerificationFormData.password,
+        resendEmailVerificationFormData.password
       );
     } catch (err) {
       if (err instanceof Error) {
@@ -107,7 +109,7 @@ export const ResendEmailVerificationPage = () => {
       });
     console.log(
       'ResendEmailVerification response:',
-      resendEmailVerificationResponse,
+      resendEmailVerificationResponse
     );
 
     if (
@@ -123,7 +125,7 @@ export const ResendEmailVerificationPage = () => {
       setIsLoading(false);
       setErrorMessage(
         resendEmailVerificationResponse.errorCode ||
-          'authentication.resendEmailVerification.failed',
+          'authentication.resendEmailVerification.failed'
       );
       return;
     }

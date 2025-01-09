@@ -21,13 +21,15 @@ export const VerifyEmailPage = () => {
     async (data: { token: string }): Promise<VerifyEmailResponse> => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/auth/public/verify-email?token=${data.token}`,
+          `${
+            import.meta.env.VITE_API_URL
+          }/authentication/public/verify-email?token=${data.token}`,
           {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-          },
+          }
         );
         return (await response.json()) as VerifyEmailResponse;
       } catch (error) {
@@ -38,7 +40,7 @@ export const VerifyEmailPage = () => {
         };
       }
     },
-    [],
+    []
   );
 
   const processVerifyEmail = useCallback(
@@ -74,7 +76,7 @@ export const VerifyEmailPage = () => {
       if (!verifyEmailResponse.success) {
         setIsLoading(false);
         setErrorMessage(
-          verifyEmailResponse.errorCode || 'authentication.verifyEmail.failed',
+          verifyEmailResponse.errorCode || 'authentication.verifyEmail.failed'
         );
         return;
       }
@@ -82,7 +84,7 @@ export const VerifyEmailPage = () => {
       setIsLoading(false);
       setSuccessMessage('authentication.verifyEmail.success');
     },
-    [verifyEmailRequest],
+    [verifyEmailRequest]
   );
 
   useEffect(() => {

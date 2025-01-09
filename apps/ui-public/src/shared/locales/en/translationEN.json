@@ -1,31 +1,359 @@
 {
+  "navBar": {
+    "links": {
+      "login": "Login",
+      "register": "Register",
+      "home": "Home",
+      "userProfile": "Profile",
+      "logout": "Logout",
+      "features": "Features"
+    }
+  },
+
+  "shared": {
+    "components": {
+      "atoms": {
+        "modal": {
+          "close": "Close"
+        }
+      },
+      "molecules": {
+        "passwordInputField": {
+          "passwordStrength": "Password Strength: ",
+          "weak": "Weak",
+          "moderate": "Moderate",
+          "strong": "Strong"
+        }
+      },
+      "organisms": {
+        "featureOverview": {
+          "title": "Features",
+          "titleInfo": "Select a feature to get started.",
+          "links": {
+            "passwordManager": "Password Manager",
+            "budgetPlaner": "Budget Planner",
+            "calendar": "Calendar",
+            "publicCookbook": "Public Cookbook",
+            "taskManagement": "Task Management"
+          },
+          "info": {
+            "passwordManager": "Protect your passwords",
+            "budgetPlaner": "Keep track of your finances and budgets",
+            "calendar": "Never miss a birthday again",
+            "publicCookbook": "Create, share, or find new recipes in the community",
+            "taskManagement": "Plan and organize your To-Do's"
+          },
+          "currently": "WIP",
+          "planned": "Planned"
+        }
+      },
+      "pages": {
+        "loadingScreenPage": {
+          "title": "Please Wait"
+        },
+        "userProfile": {
+          "title": "Locked for Test Users"
+        }
+      }
+    }
+  },
+
   "landingPage": {
-    "title": "Welcome to LifeOS"
+    "hero": {
+      "title": "Welcome to LifeOS",
+      "description": "Your digital home for all essential functions. Organize your entire life with just one application: from passwords to finances, calendar, and more.",
+      "button": "Discover Now"
+    },
+    "features": {
+      "title": "Features",
+      "subtitle": "Discover the versatile possibilities of LifeOS",
+      "itemTitle1": "Password Manager",
+      "itemDescription1": "Manage all your passwords securely in one place. We use a modern zero-knowledge method, meaning your data remains safe even in the event of a hacker attack. Only you have access to your passwords – not even we can see them. Your security is our top priority, and you can rely on that.",
+      "itemTitle2": "Budget Planner",
+      "itemDescription2": "Keep track of your finances: manage income and expenses, create detailed budgets, and set individual savings goals. Our budget planner helps you achieve financial freedom and ensures you always know where your money goes. Perfect for personal finances or planning larger projects.",
+      "itemTitle3": "Calendar",
+      "itemDescription3": "Never miss an important appointment, birthday, or anniversary again! Our calendar helps you effortlessly organize all your private and professional commitments. You can set reminders for events and even plan shared appointments with friends and family. Your loved ones will appreciate your perfect organization.",
+      "itemTitle4": "Public Cookbook",
+      "itemDescription4": "Discover and share recipes in our community! Comment on your favorite recipes, try new dishes, and upload your own creations. For precise results, you can easily adjust the ingredient list to the desired number of servings – thanks to the integrated calorie and portion calculator. Whether for hobby chefs or professionals – our cookbook is your culinary companion.",
+      "itemTitle5": "Task Planner",
+      "itemDescription5": "Keep track of all your tasks – whether it’s daily chores, professional projects, or long-term goals. With our task planner, you’ll never forget anything important again. Prioritize your to-dos, set deadlines, and use practical reminders to stay productive. Perfect for anyone who wants to work more efficiently and stay organized."
+    },
+    "cta": {
+      "title": "Ready to get started?",
+      "description": "Create an account now and leverage the power of LifeOS to simplify your daily life.",
+      "button": "Create Account"
+    },
+    "instructions": {
+      "title": "What’s Next?",
+      "itemTitle1": "Register or Login",
+      "itemDescription1": "Create an account or log in to access all the features of LifeOS. Simply click the ‘Register’ or ‘Login’ button and follow the instructions. Your personal account allows for secure and customized use of the platform.",
+      "itemTitle2": "Choose a Feature",
+      "itemDescription2": "After logging in, you can choose from a variety of features designed to make your life easier. Whether you want to manage passwords securely, create a budget, or organize your day with a calendar, just select the feature you want to use and get started right away.",
+      "itemTitle3": "Secure Important Data",
+      "itemDescription3": "Use our tools to securely store your personal data and structure your daily life. Enter your information, save it with a few clicks, and experience how easy it is to have everything organized and protected in one place."
+    }
   },
 
   "authentication": {
     "login": {
       "title": "Login",
       "labels": {
-        "email": "E-mail",
+        "email": "Email",
         "password": "Password",
         "registerLink": "Not registered yet?",
-        "resendVerificationEmail": "No verification mail received?",
+        "requestPasswordResetLink": "Forgot Password?",
+        "resendVerificationEmail": "Didn’t receive a verification email?",
         "submit": "Login"
       },
       "placeholders": {
-        "email": "E-mail",
+        "email": "Email",
         "password": "Password"
+      },
+      "success": "You have successfully logged in and will be redirected shortly.",
+      "errors": {
+        "pendingVerification": "You haven’t verified your email yet. If you haven’t received the email after 15 minutes, you can request a new one.",
+        "loginFailed": "Login failed. You may have entered incorrect credentials, or your email address has not yet been verified. If the problem persists, please contact support."
+      }
+    },
+
+    "register": {
+      "title": "Register",
+      "labels": {
+        "username": "Username",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "newsletter": "Accept Newsletter",
+        "terms": "Accept Terms of Use",
+        "loginLink": "Already registered?",
+        "submit": "Register"
+      },
+      "placeholders": {
+        "username": "Username",
+        "email": "Email",
+        "password": "Password"
+      },
+      "modals": {
+        "username": {
+          "title": "A valid username looks like this:",
+          "length": "It must be between 3 and 30 characters long",
+          "illegalChars": "It can only contain alphanumeric characters, - and _"
+        },
+        "password": {
+          "title": "A secure password looks like this:",
+          "length": "At least 8 characters long",
+          "letters": "Contains uppercase and lowercase letters",
+          "number": "Contains numbers",
+          "specialChar": "Contains special characters"
+        }
+      },
+      "success": "A confirmation link to activate your user account has been sent to the provided email address.",
+      "errors": {
+        "usernameAlreadyExists": "The username is already taken.",
+        "invalidInput": "Invalid input",
+        "passwordMatch": "Passwords do not match.",
+        "registrationFailed": "Registration failed, please try again later or contact support."
+      }
+    },
+
+    "verifyEmail": {
+      "title": "Verify Email",
+      "labels": {
+        "resendVerificationLink": "Request a new code"
+      },
+      "text": {
+        "resendVerificationInfoText": "Your code has expired? "
+      },
+
+      "success": "You have successfully verified your email address. You can now proceed with logging in.",
+      "errors": {
+        "tokenExpired": "Your verification code has expired. Follow the link to request a new one.",
+        "unknownError": "Something went wrong. Have you already activated your email address? If not, please contact support."
+      }
+    },
+
+    "resendEmailVerification": {
+      "title": "Request New Verification Email",
+      "labels": {
+        "email": "Email",
+        "password": "Password",
+        "submit": "Request"
+      },
+      "placeholders": {
+        "email": "Email",
+        "password": "Password"
+      },
+      "success": "A new verification link has been sent to your email address.",
+      "errors": {
+        "invalidCredentials": "Invalid login credentials"
+      }
+    },
+
+    "resetPassword": {
+      "title": "Set New Password",
+      "labels": {
+        "password": "New Password",
+        "confirmPassword": "Confirm Password",
+        "requestPasswordResetLink": "Didn’t receive an email?",
+        "submit": "Submit"
+      },
+      "placeholders": {
+        "password": "Password"
+      },
+      "success": "Your password has been successfully changed. You can now log in.",
+      "errors": {
+        "passwordMatch": "Passwords do not match.",
+        "unknownError": "An error occurred. Have you already reset your password? If not, you can request a new email using the link."
+      }
+    },
+
+    "requestPasswordReset": {
+      "title": "Reset Password",
+      "labels": {
+        "email": "Registered Email",
+        "requestPasswordResetLink": "Didn’t receive an email?",
+        "submit": "Submit"
+      },
+      "placeholders": {
+        "email": "Email"
+      },
+      "success": "If your email address is registered, a link to reset your password has been sent to your email address.",
+      "errors": {
+        "unknownError": "An unknown error occurred."
+      }
+    }
+  },
+
+  "passwordManager": {
+    "unlockVault": {
+      "title": "Unlock Vault",
+      "labels": {
+        "masterPassword": "Master Password",
+        "submit": "Unlock"
+      },
+      "placeholders": {
+        "masterPassword": "Master Password"
+      },
+      "links": {
+        "featuresLink": "Back to Overview"
+      },
+      "success": "Vault successfully unlocked.",
+      "errors": {
+        "unlockVaultFailed": "The master password is incorrect."
+      }
+    },
+
+    "createVault": {
+      "title": "Create Vault",
+      "labels": {
+        "masterPassword": "Master Password",
+        "submit": "Create"
+      },
+      "placeholders": {
+        "masterPassword": "Master Password"
+      },
+      "success": "Vault successfully unlocked.",
+      "errors": {
+        "unlockVaultFailed": "The master password is incorrect."
+      }
+    },
+
+    "accountList": {
+      "title": "Your Accounts",
+      "noAccounts": "You haven’t added any accounts yet."
+    },
+
+    "accountInfo": {
+      "edit": "Edit",
+      "username": "Username",
+      "email": "Email",
+      "password": "Password",
+      "notes": "Notes",
+      "createdAt": "Created At",
+      "updatedAt": "Last Updated",
+      "empty": "Empty",
+      "noAccountSelected": "No account selected."
+    },
+
+    "createAccount": {
+      "title": "Create Account",
+      "labels": {
+        "accountName": "Name",
+        "username": "Username",
+        "email": "Email",
+        "password": "Password",
+        "notes": "Notes"
+      },
+      "placeholders": {
+        "accountName": "Example Company",
+        "username": "Test User",
+        "email": "test@test.com",
+        "password": "12345678",
+        "notes": "Security Token 12345678"
+      },
+      "submit": "Create"
+    },
+
+    "editAccount": {
+      "title": "Edit Account",
+      "labels": {
+        "accountName": "Name",
+        "username": "Username",
+        "email": "Email",
+        "password": "Password",
+        "notes": "Notes"
+      },
+      "placeholders": {
+        "accountName": "Example Company",
+        "username": "Test User",
+        "email": "test@test.com",
+        "password": "12345678",
+        "notes": "Security Token 12345678"
+      },
+      "submit": "Save"
+    },
+
+    "search": {
+      "placeholders": {
+        "search": "Search"
       }
     }
   },
 
   "valueObjects": {
     "email": {
-      "invalidInput": "The provided email address is invalid."
+      "notAString": "The email address provided is invalid.",
+      "tooLong": "The email address is too long.",
+      "illegalCharacters": "The email address contains invalid characters.",
+      "invalidFormat": "The format of the email address is invalid."
+    },
+    "newsletter": {
+      "notBoolean": "The newsletter must be a boolean."
     },
     "password": {
-      "invalidInput": "The provided password is invalid."
+      "notAString": "The password provided is invalid.",
+      "tooShort": "The password is too short.",
+      "tooLong": "The password is too long.",
+      "noUppercase": "The password does not contain uppercase letters.",
+      "noLowercase": "The password does not contain lowercase letters.",
+      "noNumber": "The password does not contain numbers.",
+      "noSpecialChar": "The password does not contain special characters."
+    },
+    "terms": {
+      "notBoolean": "The terms of use are invalid.",
+      "notAccepted": "You must accept the terms of use to proceed."
+    },
+    "token": {
+      "notAString": "The token is invalid.",
+      "tooShort": "The token is too short.",
+      "tooLong": "The token is too long.",
+      "invalidCharacters": "The token contains invalid characters."
+    },
+    "username": {
+      "notAString": "The username is invalid.",
+      "tooShort": "The username is too short.",
+      "tooLong": "The username is too long.",
+      "illegalCharacters": "The username contains invalid characters."
     }
   }
 }

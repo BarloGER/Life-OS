@@ -5,8 +5,9 @@ import express, { Express, Request, Response } from 'express';
 import cors, { CorsOptions } from 'cors';
 import { sessionConfig } from '../express-session';
 import { AppDependencies } from 'main';
-import { createAuthenticationRouter } from './routes/authenticationRouter';
+import { createPublicAuthenticationRouter } from '@features/authentication/frameworks/express/routes';
 import { createRateLimiter } from './middlewares/rateLimiterFactory';
+import { createPublicPasswordManagerRouter } from '@features/password-manager/frameworks/express/routes';
 
 export function initializeServer(dependencies: AppDependencies) {
   const app: Express = express();
@@ -44,8 +45,13 @@ export function initializeServer(dependencies: AppDependencies) {
     res.send('<h1>Welcome to LifeOS api</h1>');
   });
 
-  const authenticationRouter = createAuthenticationRouter(dependencies);
-  app.use('/auth', authenticationRouter);
+  const publicAuthenticationRouter =
+    createPublicAuthenticationRouter(dependencies);
+  app.use('/authentication/public', publicAuthenticationRouter);
+
+  const publicPasswordManagerRouter =
+    createPublicPasswordManagerRouter(dependencies);
+  app.use('/password-manager/public', publicPasswordManagerRouter);
 
   app.use('*', (req: Request, res: Response) => {
     res.send('<h1>404! Page not found!</h1>');
@@ -62,7 +68,7 @@ export function initializeServer(dependencies: AppDependencies) {
 
     https.createServer(sslOptions, app).listen(PORT, HOST, () => {
       console.log(
-        `[server]: HTTPS Server is running on https://${HOST}:${PORT}`,
+        `[server]: HTTPS Server is running on https://${HOST}:${PORT}`
       );
     });
   } else {

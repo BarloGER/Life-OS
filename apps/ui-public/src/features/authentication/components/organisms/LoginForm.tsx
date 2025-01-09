@@ -38,6 +38,12 @@ export const LoginForm: React.FC<LoginFormProps> = ({
     <form className="login__form" onSubmit={processLogin}>
       <h1>{t('authentication.login.title')}</h1>
 
+      <div style={{ marginBottom: '1rem', color: 'var(--color-warning)' }}>
+        <h4>Test user for Recruiter and Devs</h4>
+        <p>E-mail: test@test.com</p>
+        <p>Password: 12345678!Ss</p>
+      </div>
+
       <InputField
         name="email"
         label={t('authentication.login.labels.email')}
@@ -60,15 +66,18 @@ export const LoginForm: React.FC<LoginFormProps> = ({
       {errorMessage && <ErrorMessage message={errorMessage} />}
       {successMessage && <SuccessMessage message={successMessage} />}
 
-      <Link className="login__link" to="/register">
+      <Link className="login__link" to="/authentication/register">
         {t('authentication.login.labels.registerLink')}
       </Link>
 
-      <Link className="login__link" to="/request-password-reset">
+      <Link className="login__link" to="/authentication/request-password-reset">
         {t('authentication.login.labels.requestPasswordResetLink')}
       </Link>
 
-      <Link className="login__link" to="/resend-email-verification">
+      <Link
+        className="login__link"
+        to="/authentication/resend-email-verification"
+      >
         {t('authentication.login.labels.resendVerificationEmail')}
       </Link>
 

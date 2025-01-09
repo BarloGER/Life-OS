@@ -47,14 +47,16 @@ export const ResetPasswordPage = () => {
   }): Promise<ResetPasswordResponse> => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/auth/public/reset-password?token=${data.token}`,
+        `${
+          import.meta.env.VITE_API_URL
+        }/authentication/public/reset-password?token=${data.token}`,
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(data),
-        },
+        }
       );
       return (await response.json()) as ResetPasswordResponse;
     } catch (error) {
@@ -89,7 +91,7 @@ export const ResetPasswordPage = () => {
     let validPassword;
     try {
       validPassword = Password.createForRegistration(
-        resetPasswordFormData.password,
+        resetPasswordFormData.password
       );
     } catch (err) {
       if (err instanceof Error) {
@@ -103,7 +105,7 @@ export const ResetPasswordPage = () => {
       setIsLoading(false);
       setPasswordError(t('authentication.resetPassword.errors.passwordMatch'));
       setConfirmPasswordError(
-        t('authentication.resetPassword.errors.passwordMatch'),
+        t('authentication.resetPassword.errors.passwordMatch')
       );
       return;
     }
@@ -124,8 +126,7 @@ export const ResetPasswordPage = () => {
     if (!resetPasswordResponse.success) {
       setIsLoading(false);
       setErrorMessage(
-        resetPasswordResponse.errorCode ||
-          'authentication.resetPassword.failed',
+        resetPasswordResponse.errorCode || 'authentication.resetPassword.failed'
       );
       return;
     }

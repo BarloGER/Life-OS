@@ -1,0 +1,1 @@
+export { PasswordManagerLayout } from './PasswordManagerLayout';

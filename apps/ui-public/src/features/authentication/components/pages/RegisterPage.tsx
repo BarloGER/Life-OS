@@ -55,7 +55,7 @@ export const RegisterPage = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/');
+      navigate('/features');
     }
   }, [isAuthenticated, navigate]);
 
@@ -68,7 +68,7 @@ export const RegisterPage = () => {
   }): Promise<RegisterResponse> {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/auth/public/register`,
+        `${import.meta.env.VITE_API_URL}/authentication/public/register`,
         {
           method: 'POST',
           headers: {
@@ -76,7 +76,7 @@ export const RegisterPage = () => {
           },
           body: JSON.stringify(data),
           credentials: 'include',
-        },
+        }
       );
       return (await response.json()) as RegisterResponse;
     } catch (error) {
@@ -157,7 +157,7 @@ export const RegisterPage = () => {
       setIsRegisterLoading(false);
       setPasswordError(t('authentication.register.errors.passwordMatch'));
       setConfirmPasswordError(
-        t('authentication.register.errors.passwordMatch'),
+        t('authentication.register.errors.passwordMatch')
       );
       return;
     }
@@ -203,7 +203,7 @@ export const RegisterPage = () => {
     if (!registerResponse.success) {
       setIsRegisterLoading(false);
       setErrorMessage(
-        registerResponse.errorCode || 'authentication.register.failed',
+        registerResponse.errorCode || 'authentication.register.failed'
       );
       return;
     }

@@ -1,0 +1,84 @@
+/* src/features/password-manager/organisms/assets/vault-nav-bar.css */
+
+.vault-nav-bar {
+  height: 40px;
+  background-color: var(--color-background-secondary);
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.vault-nav-bar__container {
+  display: flex;
+  padding: 0 1rem;
+  align-items: center;
+  width: 100%;
+}
+
+.vault-nav-bar__brand h3 {
+  margin: 0;
+}
+
+/* Suchleiste */
+.vault-nav-bar__search {
+  width: 100%;
+  /* padding: 0 1rem; */
+}
+
+.vault-nav-bar__search input {
+  width: 95%;
+  padding: 0.3rem 0.5rem;
+  font-size: var(--font-sm);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-background-secondary);
+}
+
+/* Actions (Create, Lock, Hamburger) */
+.vault-nav-bar__actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Create (+) button */
+.vault-nav-bar__create-btn {
+  border: none;
+  color: var(--color-button);
+  font-size: var(--font-lg);
+  background: transparent;
+  cursor: pointer;
+}
+
+/* Lock (Sperren) button */
+.vault-nav-bar__lock-btn {
+  border: none;
+  background-color: transparent;
+  color: var(--color-error);
+  font-size: var(--font-lg);
+  cursor: pointer;
+}
+
+/* Hamburger => standard: hidden in Desktop, visible in Mobile */
+.vault-nav-bar__hamburger {
+  background: transparent;
+  border: none;
+  color: var(--color-text);
+  font-size: var(--font-md);
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+/* Desktop:  ab 881px -> hide hamburger */
+@media (min-width: 881px) {
+  .vault-nav-bar__hamburger {
+    display: none;
+  }
+}
+
+/* Mobile:  unter 881px -> show hamburger */
+@media (max-width: 880px) {
+  .vault-nav-bar__hamburger {
+    display: block;
+  }
+}

@@ -1,7 +1,9 @@
+// src/features/landing/organisms/LandingPageInstructions.tsx
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import './assets/landing-page-instructions.css';
 
-export const LandingPageInstructions = () => {
+export const LandingPageInstructions: React.FC = () => {
   const { t } = useTranslation();
 
   return (
