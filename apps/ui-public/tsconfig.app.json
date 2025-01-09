@@ -19,6 +19,25 @@
 
       "@features/authentication/components/*": [
         "./features/authentication/components/*"
+      ],
+
+      "@features/password-manager/components/*": [
+        "./features/password-manager/components/*"
+      ],
+      "@features/password-manager/context/*": [
+        "./features/password-manager/context/*"
+      ],
+      "@features/password-manager/entities/*": [
+        "./features/password-manager/entities/*"
+      ],
+      "@features/password-manager/layouts/*": [
+        "./features/password-manager/layouts/*"
+      ],
+      "@features/password-manager/repositories/*": [
+        "./features/password-manager/repositories/*"
+      ],
+      "@features/password-manager/services/*": [
+        "./features/password-manager/services/*"
       ]
     }
   },

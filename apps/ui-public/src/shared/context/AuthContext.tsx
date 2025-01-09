@@ -72,7 +72,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   async function checkAuthAndGetUserRequest(): Promise<AuthResponse> {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/auth/public/check-auth`,
+        `${import.meta.env.VITE_API_URL}/authentication/public/check-auth`,
         {
           method: 'GET',
           headers: {
@@ -81,7 +81,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           credentials: 'include',
         }
       );
-      console.log(response);
       return (await response.json()) as AuthResponse;
     } catch (error) {
       console.error(error);

@@ -39,7 +39,7 @@ export const LoginPage = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/');
+      navigate('/features');
     }
   }, [isAuthenticated, navigate]);
 
@@ -49,7 +49,7 @@ export const LoginPage = () => {
   }): Promise<LoginResponse> {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/auth/public/login`,
+        `${import.meta.env.VITE_API_URL}/authentication/public/login`,
         {
           method: 'POST',
           headers: {
@@ -57,7 +57,7 @@ export const LoginPage = () => {
           },
           body: JSON.stringify(data),
           credentials: 'include',
-        },
+        }
       );
       return (await response.json()) as LoginResponse;
     } catch (error) {
@@ -133,7 +133,7 @@ export const LoginPage = () => {
     setIsAuthenticated(true);
     setIsLoginLoading(false);
     setSuccessMessage('authentication.login.success');
-    navigate('/');
+    navigate('/features');
   };
 
   return (

@@ -1,0 +1,126 @@
+.account-info {
+  height: 100%;
+  background-color: var(--color-component-background);
+  padding: 1rem;
+  border-left: 1px solid var(--color-border);
+  width: 100%;
+}
+
+.account-info__buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.account-info__edit {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--color-button);
+  padding: 0.5rem;
+  font-size: var(--font-sm);
+  border: none;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.account-info__delete {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  padding: 0.5rem;
+  font-size: var(--font-xl);
+  border: none;
+  margin-bottom: 1rem;
+  color: var(--color-error);
+  cursor: pointer;
+}
+
+.account-info__edit:hover {
+  background-color: var(--color-button-hover);
+}
+
+.account-info__delete:hover {
+  transform: scaleX(1.1);
+}
+
+.account-info h2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 1rem;
+}
+
+.account-info__data-container,
+.account-info__info-container {
+  margin-bottom: 1rem;
+}
+
+.account-info__data-container__item,
+.account-info__info-container__item {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid var(--color-border);
+  border-left: 1px solid var(--color-border);
+  border-right: 1px solid var(--color-border);
+  padding: 0.5rem;
+  font-size: var(--font-sm);
+}
+
+.account-info__data-container__item:hover {
+  background-color: var(--color-background-secondary);
+  cursor: pointer;
+}
+
+.account-info__data-container__item:nth-child(3)
+  .account-info__data-container__text {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.account-info__data-container__item:last-child,
+.account-info__info-container__item:last-child {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.account-info__data-container__icon,
+.account-info__info-container__icon {
+  margin-right: 0.5rem;
+  font-size: var(--font-sm);
+  min-height: 1rem;
+  min-width: 1rem;
+}
+
+.account-info__data-container__text-info,
+.account-info__info-container_text-info {
+  font-size: var(--font-sm);
+}
+
+.account-info__data-container__text-container,
+.account-info__info-container__text-container {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.account-info__data-container button {
+  color: var(--color-text);
+  border: none;
+  font-size: var(--font-md);
+  background: transparent;
+}
+
+.account-info__data-container__text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.account-info__data-container__text,
+.account-info__info-container__text {
+  font-size: var(--font-sm);
+}
+
+.account-info .success-message {
+}

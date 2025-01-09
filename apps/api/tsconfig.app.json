@@ -11,11 +11,30 @@
       "@shared/services/*": ["./shared/services/*"],
       "@shared/utils/*": ["./shared/utils/*"],
 
+      "@features/authentication/entities/*": [
+        "./features/authentication/entities/*"
+      ],
+      "@features/authentication/frameworks/*": [
+        "./features/authentication/frameworks/*"
+      ],
       "@features/authentication/interface-adapters/*": [
         "./features/authentication/interface-adapters/*"
       ],
       "@features/authentication/use-cases/*": [
         "./features/authentication/use-cases/*"
+      ],
+
+      "@features/password-manager/entities/*": [
+        "./features/password-manager/entities/*"
+      ],
+      "@features/password-manager/frameworks/*": [
+        "./features/password-manager/frameworks/*"
+      ],
+      "@features/password-manager/interface-adapters/*": [
+        "./features/password-manager/interface-adapters/*"
+      ],
+      "@features/password-manager/use-cases/*": [
+        "./features/password-manager/use-cases/*"
       ]
     }
   },

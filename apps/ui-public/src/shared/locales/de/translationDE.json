@@ -4,7 +4,9 @@
       "login": "Anmelden",
       "register": "Registrieren",
       "home": "Home",
-      "userProfile": "Profil"
+      "userProfile": "Profil",
+      "logout": "Abmelden",
+      "features": "Features"
     }
   },
 
@@ -22,33 +24,73 @@
           "moderate": "Moderat",
           "strong": "Stark"
         }
+      },
+      "organisms": {
+        "featureOverview": {
+          "title": "Features",
+          "titleInfo": "Wähle ein Feature um loszulegen.",
+          "links": {
+            "passwordManager": "Passwort-Manager",
+            "budgetPlaner": "Budgetplaner",
+            "calendar": "Kalender",
+            "publicCookbook": "Öffentliches Kochbuch",
+            "taskManagement": "Aufgabenplanung"
+          },
+          "info": {
+            "passwordManager": "Schütze deine Passwörter",
+            "budgetPlaner": "Deine Finanzen und Budgets im Überblick",
+            "calendar": "Verpasse keine Geburtstage mehr",
+            "publicCookbook": "Erstelle, teile oder finde neue Rezepte in der Community",
+            "taskManagement": "Plane und organisiere ToDo's"
+          },
+          "currently": "WIP",
+          "planned": "Geplant"
+        }
+      },
+      "pages": {
+        "loadingScreenPage": {
+          "title": "Bitte Warten"
+        },
+        "userProfile": {
+          "title": "Für Testnutzer gesperrt"
+        }
       }
     }
   },
 
   "landingPage": {
     "hero": {
-      "title": "Willkommen bei Lockify",
-      "description": "Deine ultimative Lösung, um Passwörter, Bankinformationen und mehr zu sichern und zu verwalten.",
-      "button": "Mehr erfahren"
+      "title": "Willkommen bei LifeOS",
+      "description": "Dein digitales Zuhause für alle wichtigen Funktionen. Organisiere dein gesammtes Leben mit nur einer Anwendung: Von Passwörtern über Finanzen bis hin zu Kalender und mehr.",
+      "button": "Jetzt entdecken"
     },
     "features": {
-      "title": "Funktionen",
-      "itemTitle1": "Sichere Verschlüsselung",
-      "itemDescription1": "Wir verwenden modernste Verschlüsselung, um deine Daten sicher und geschützt zu halten.",
-      "itemTitle2": "Einfacher Zugang",
-      "itemDescription2": "Greife von jedem Gerät, jederzeit und überall auf deine Daten zu.",
-      "itemTitle3": "Alles speichern",
-      "itemDescription3": "Speichere deine Passwörter, Bankinformationen, Kontakte und Notizen. Halte alle wichtigen Informationen organisiert und sicher."
+      "title": "Features",
+      "subtitle": "Entdecke die vielseitigen Möglichkeiten von LifeOS",
+      "itemTitle1": "Passwort-Manager",
+      "itemDescription1": "Verwalte all deine Passwörter sicher an einem Ort. Wir setzen auf eine moderne Zero-Knowledge-Methode, was bedeutet, dass selbst im Falle eines Hackerangriffs deine Daten sicher bleiben. Nur du hast Zugriff auf deine Passwörter – nicht einmal wir können sie einsehen. Deine Sicherheit steht bei uns an erster Stelle, und darauf kannst du dich verlassen.",
+      "itemTitle2": "Budgetplaner",
+      "itemDescription2": "Behalte den Überblick über deine Finanzen: Verwalte Einnahmen und Ausgaben, erstelle detaillierte Budgets und setze dir individuelle Sparziele. Unser Budgetplaner hilft dir, finanzielle Freiheit zu erlangen und sorgt dafür, dass du jederzeit weißt, wohin dein Geld fließt. Perfekt für persönliche Finanzen oder zur Planung größerer Projekte.",
+      "itemTitle3": "Kalender",
+      "itemDescription3": "Vergiss nie wieder einen wichtigen Termin, Geburtstag oder Jahrestag! Unser Kalender hilft dir dabei, all deine privaten und beruflichen Verpflichtungen mühelos zu organisieren. Du kannst Ereignisse mit Erinnerungen versehen und sogar gemeinsame Termine mit Freunden und Familie planen. Deine Liebsten werden dir für die perfekte Organisation danken.",
+      "itemTitle4": "Öffentliches Kochbuch",
+      "itemDescription4": "Entdecke und teile Rezepte in unserer Community! Kommentiere deine Lieblingsrezepte, probiere neue Gerichte aus und lade eigene Kreationen hoch. Für präzise Ergebnisse kannst du die Zutatenliste einfach an die gewünschte Portionsanzahl anpassen – dank des integrierten Kalorien- und Portionsrechners. Ob für Hobbyköche oder Profis – unser Kochbuch ist dein kulinarischer Begleiter.",
+      "itemTitle5": "Aufgabenplaner",
+      "itemDescription5": "Behalte all deine Aufgaben im Blick – egal ob es sich um alltägliche Hausarbeiten, berufliche Projekte oder langfristige Ziele handelt. Mit unserem Aufgabenplaner vergisst du nie wieder etwas Wichtiges. Priorisiere deine To-Dos, setze Deadlines und nutze praktische Erinnerungen, um stets produktiv zu bleiben. Perfekt für alle, die effizienter arbeiten und organisiert bleiben möchten."
+    },
+    "cta": {
+      "title": "Bereit, loszulegen?",
+      "description": "Erstelle dir jetzt ein Konto und nutze die Power von LifeOS, um deinen Alltag zu vereinfachen.",
+      "button": "Konto erstellen"
     },
     "instructions": {
-      "title": "So funktioniert's",
-      "itemTitle1": "Schritt 1",
-      "itemDescription1": "Erstelle ein Konto und richte dein Master-Passwort ein.",
-      "itemTitle2": "Schritt 2",
-      "itemDescription2": "Speichere alle deine Daten an einem sicheren Ort.",
-      "itemTitle3": "Schritt 3",
-      "itemDescription3": "Greife einfach auf deine Daten zu und verwalte sie mühelos."
+      "title": "Wie geht es weiter?",
+      "itemTitle1": "Registrieren oder Anmelden",
+      "itemDescription1": "Erstelle ein Konto oder melde dich an, um auf alle Funktionen von LifeOS zugreifen zu können. Klicke dazu einfach auf die Schaltfläche „Registrieren“ oder „Anmelden“ und folge den Anweisungen. Dein persönlicher Account ermöglicht dir eine sichere und individuelle Nutzung der Plattform.",
+      "itemTitle2": "Feature auswählen",
+      "itemDescription2": "Nach der Anmeldung kannst du aus einer Vielzahl von Features wählen, die dir das Leben erleichtern. Möchtest du Passwörter sicher verwalten, ein Budget erstellen oder deinen Alltag mit einem Kalender organisieren? Wähle einfach das Feature aus, das du nutzen möchtest, und starte sofort.",
+      "itemTitle3": "Wichtige Daten sichern",
+      "itemDescription3": "Nutze unsere Tools, um deine persönlichen Daten sicher zu speichern und deinen Alltag zu strukturieren. Gib deine Informationen ein, speichere sie mit wenigen Klicks und erlebe, wie einfach es ist, alles organisiert und geschützt an einem Ort zu haben."
     }
   },
 
@@ -178,6 +220,102 @@
       "success": "Wenn deine E-Mail Adresse registriert ist, wurde an deine E-Mail Adresse ein Link zum zurücksetzen deines Passworts gesendet.",
       "errors": {
         "unknownError": "Es ist ein unbekannter Fehler aufgetreten."
+      }
+    }
+  },
+
+  "passwordManager": {
+    "unlockVault": {
+      "title": "Datentresor Entsperren",
+      "labels": {
+        "masterPassword": "Master-Passwort",
+        "submit": "Entsperren"
+      },
+      "placeholders": {
+        "masterPassword": "Master Passwort"
+      },
+      "links": {
+        "featuresLink": "Zurück zur Übersicht"
+      },
+      "success": "Datentresor erfolgreich entsperrt.",
+      "errors": {
+        "unlockVaultFailed": "Das Master-Passwort ist inkorrekt."
+      }
+    },
+
+    "createVault": {
+      "title": "Datentresor Erstellen",
+      "labels": {
+        "masterPassword": "Master-Passwort",
+        "submit": "Erstellen"
+      },
+      "placeholders": {
+        "masterPassword": "Master Passwort"
+      },
+      "success": "Datentresor erfolgreich entsperrt.",
+      "errors": {
+        "unlockVaultFailed": "Das Master-Passwort ist inkorrekt."
+      }
+    },
+
+    "accountList": {
+      "title": "Deine Accounts",
+      "noAccounts": "Du hast noch keine Accounts angelegt."
+    },
+
+    "accountInfo": {
+      "edit": "Bearbeiten",
+      "username": "Benutzername",
+      "email": "E-Mail",
+      "password": "Passwort",
+      "notes": "Notizen",
+      "createdAt": "Erstellt",
+      "updatedAt": "Letzte Änderung",
+      "empty": "Leer",
+      "noAccountSelected": "Kein Account ausgewählt."
+    },
+
+    "createAccount": {
+      "title": "Account Erstellen",
+      "labels": {
+        "accountName": "Name",
+        "username": "Benutzername",
+        "email": "E-Mail",
+        "password": "Passwort",
+        "notes": "Notizen"
+      },
+      "placeholders": {
+        "accountName": "Musterfirma",
+        "username": "Testnutzer",
+        "email": "test@test.de",
+        "password": "12345678",
+        "notes": "Sicherheitstoken 12345678"
+      },
+      "submit": "Erstellen"
+    },
+
+    "editAccount": {
+      "title": "Account Bearbeiten",
+      "labels": {
+        "accountName": "Name",
+        "username": "Benutzername",
+        "email": "E-Mail",
+        "password": "Passwort",
+        "notes": "Notizen"
+      },
+      "placeholders": {
+        "accountName": "Musterfirma",
+        "username": "Testnutzer",
+        "email": "test@test.de",
+        "password": "12345678",
+        "notes": "Sicherheitstoken 12345678"
+      },
+      "submit": "Speichern"
+    },
+
+    "search": {
+      "placeholders": {
+        "search": "Suchen"
       }
     }
   },

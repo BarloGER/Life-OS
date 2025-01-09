@@ -135,7 +135,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
       {errorMessage && <ErrorMessage message={errorMessage} />}
       {successMessage && <SuccessMessage message={successMessage} />}
 
-      <Link className="register__link" to="/login">
+      <Link className="register__link" to="/authentication/login">
         {t('authentication.register.labels.loginLink')}
       </Link>
 

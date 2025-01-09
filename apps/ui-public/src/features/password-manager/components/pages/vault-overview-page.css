@@ -1,0 +1,84 @@
+/* src/features/password-manager/pages/vault-overview-page.css */
+
+/* Desktop- und Mobile-Overlays
+   =========================================== */
+
+/* Standard-Overlay-Styles, für alle Bildschirme */
+.vaultOverview__overlay--form,
+.vaultOverview__overlay--tresor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  /*
+    Darin liegt CreateAccountForm / EditAccountForm / TresorList
+    Die Form oder TresorList selbst kann
+    background: #fff / #yellow etc.
+  */
+}
+
+/*
+ * FORM Overlay => Im Desktop an der rechten Seite
+ *   (bis max 400px)
+ * Tresor-Overlay => full left=0 in Mobile
+ */
+.vaultOverview__overlay--form {
+  display: flex;
+  /* Damit wir die Form z. B. an einer Container-DIV ausrichten können */
+  align-items: stretch;
+  justify-content: flex-end; /* schiebt den Container nach rechts */
+}
+
+/* Inner-Container: Du kannst CreateAccountForm in
+   .create-account z. B. style:n */
+.create-account {
+  background-color: yellow;
+  width: 100%;
+  /* in Mobile => full width */
+  max-width: 400px; /* in Desktop => max 400px */
+  height: 100%;
+}
+
+/*
+ * Tresor-Overlay => es hat max-width: 315px (wie du willst)
+ * but you can also keep full width in mobile => up to you
+ */
+.vaultOverview__overlay--tresor {
+  max-width: 315px;
+}
+
+/*
+ * Mit "Close" Button oben
+ */
+.vaultOverview__overlay--closeBtn {
+  background: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin: 0.5rem;
+  padding: 0.3rem 0.6rem;
+}
+
+@media (min-width: 880px) {
+  .create-account {
+    width: 50%;
+    min-width: none;
+  }
+}
+
+/*
+ * TresorList => hidden in mobile by default
+ * wir haben .vaultDesktopTresor
+ */
+@media (max-width: 880px) {
+  .vaultDesktopTresor {
+    display: none;
+  }
+
+  .vaultOverview__overlay--form {
+    display: block;
+  }
+}
