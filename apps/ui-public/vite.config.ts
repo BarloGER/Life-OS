@@ -17,7 +17,7 @@ export default defineConfig(({ command }) => {
           '@': path.resolve(__dirname, './src'),
           '@shared/components': path.resolve(
             __dirname,
-            './src/shared/components',
+            './src/shared/components'
           ),
           '@shared/configs': path.resolve(__dirname, './src/shared/configs'),
           '@shared/context': path.resolve(__dirname, './src/shared/context'),
@@ -27,7 +27,32 @@ export default defineConfig(({ command }) => {
 
           '@features/authentication/components': path.resolve(
             __dirname,
-            './src/features/authentication/components',
+            './src/features/authentication/components'
+          ),
+
+          '@features/password-manager/components': path.resolve(
+            __dirname,
+            './src/features/password-manager/components'
+          ),
+          '@features/password-manager/context': path.resolve(
+            __dirname,
+            './src/features/password-manager/context'
+          ),
+          '@features/password-manager/entities': path.resolve(
+            __dirname,
+            './src/features/password-manager/entities'
+          ),
+          '@features/password-manager/layouts': path.resolve(
+            __dirname,
+            './src/features/password-manager/layouts'
+          ),
+          '@features/password-manager/repositories': path.resolve(
+            __dirname,
+            './src/features/password-manager/repositories'
+          ),
+          '@features/password-manager/services': path.resolve(
+            __dirname,
+            './src/features/password-manager/services'
           ),
         },
       },
@@ -69,7 +94,7 @@ export default defineConfig(({ command }) => {
           '@': path.resolve(__dirname, './src'),
           '@shared/components': path.resolve(
             __dirname,
-            './src/shared/components',
+            './src/shared/components'
           ),
           '@shared/configs': path.resolve(__dirname, './src/shared/configs'),
           '@shared/context': path.resolve(__dirname, './src/shared/context'),
@@ -79,7 +104,32 @@ export default defineConfig(({ command }) => {
 
           '@features/authentication/components': path.resolve(
             __dirname,
-            './src/features/authentication/components',
+            './src/features/authentication/components'
+          ),
+
+          '@features/password-manager/components': path.resolve(
+            __dirname,
+            './src/features/password-manager/components'
+          ),
+          '@features/password-manager/context': path.resolve(
+            __dirname,
+            './src/features/password-manager/context'
+          ),
+          '@features/password-manager/entities': path.resolve(
+            __dirname,
+            './src/features/password-manager/entities'
+          ),
+          '@features/password-manager/layouts': path.resolve(
+            __dirname,
+            './src/features/password-manager/layouts'
+          ),
+          '@features/password-manager/repositories': path.resolve(
+            __dirname,
+            './src/features/password-manager/repositories'
+          ),
+          '@features/password-manager/services': path.resolve(
+            __dirname,
+            './src/features/password-manager/services'
           ),
         },
       },
