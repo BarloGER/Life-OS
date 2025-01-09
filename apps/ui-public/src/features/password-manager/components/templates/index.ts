@@ -1,0 +1,1 @@
+export { PasswordManagerTemplate } from './PasswordManagerTemplate';

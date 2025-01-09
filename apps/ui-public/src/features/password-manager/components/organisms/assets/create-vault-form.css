@@ -1,0 +1,36 @@
+.create-vault__form {
+  width: 90%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.create-vault__form h1 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: var(--color-text);
+}
+
+.create-vault__form label {
+  display: block;
+  margin-top: 10px;
+  font-size: var(--font-md);
+  color: var(--color-text);
+}
+
+.create-vault__input,
+.create-vault__select {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+  font-size: var(--font-sm);
+}
+
+.create-vault__form .submit-button {
+  margin-top: 10px;
+}
+
+.create-vault__link {
+  color: var(--color-button);
+  margin-top: 1rem;
+  display: block;
+}

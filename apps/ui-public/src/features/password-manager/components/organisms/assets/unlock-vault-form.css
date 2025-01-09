@@ -1,0 +1,25 @@
+.unlock-vault__form {
+  width: 90%;
+  max-width: 350px;
+}
+
+.unlock-vault__form h1 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: var(--color-text);
+}
+
+.unlock-vault__form .input-field__container {
+  margin-bottom: 10px;
+  font-size: var(--font-sm);
+}
+
+.unlock-vault__form .submit-button {
+  margin-top: 10px;
+}
+
+.unlock-vault__link {
+  color: var(--color-button);
+  margin-top: 1rem;
+  display: block;
+}
