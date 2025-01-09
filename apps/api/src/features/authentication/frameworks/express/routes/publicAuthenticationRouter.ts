@@ -1,5 +1,5 @@
 import { sessionDurations } from '@shared/frameworks/express-session';
-import { createRateLimiter } from '../middlewares/rateLimiterFactory';
+import { createRateLimiter } from '@shared/frameworks/express/middlewares';
 import { PublicAuthenticationController } from '@features/authentication/interface-adapters/controllers/public/PublicAuthenticationController';
 import { PublicAuthenticationPresenter } from '@features/authentication/interface-adapters/presenters/public/PublicAuthenticationPresenter';
 import { PublicAuthenticationRepository } from '@features/authentication/interface-adapters/repositories/public/PublicAuthenticationRepository';
@@ -35,17 +35,17 @@ const resendEmailLimiter = createRateLimiter(2, 15); // 2 in 15min
 const requestPasswordLimiter = createRateLimiter(2, 15); // 2 in 15min
 const resetPasswordLimiter = createRateLimiter(5, 5); // 5 in 5min
 
-export function createAuthenticationRouter(
-  deps: AuthenticationRouterDependencies,
+export function createPublicAuthenticationRouter(
+  deps: AuthenticationRouterDependencies
 ) {
   const publicAuthenitcationRepository = new PublicAuthenticationRepository(
-    deps.pgClient,
+    deps.pgClient
   );
   const publicAuthenticationPresenter = new PublicAuthenticationPresenter();
 
   const publicCheckAuthUsecase = new PublicCheckAuthUsecase(
     publicAuthenitcationRepository,
-    publicAuthenticationPresenter,
+    publicAuthenticationPresenter
   );
 
   const publicRegisterUsecase = new PublicRegisterUsecase(
@@ -53,7 +53,7 @@ export function createAuthenticationRouter(
     deps.passwordHasher,
     deps.tokenGenerator,
     publicAuthenitcationRepository,
-    publicAuthenticationPresenter,
+    publicAuthenticationPresenter
   );
 
   const publicLoginUsecase = new PublicLoginUsecase(
@@ -61,12 +61,12 @@ export function createAuthenticationRouter(
     deps.passwordHasher,
     deps.tokenGenerator,
     publicAuthenitcationRepository,
-    publicAuthenticationPresenter,
+    publicAuthenticationPresenter
   );
 
   const publicVerifyEmailUsecase = new PublicVerifyEmailUsecase(
     publicAuthenitcationRepository,
-    publicAuthenticationPresenter,
+    publicAuthenticationPresenter
   );
 
   const publicResendEmailVerificationUsecase =
@@ -75,7 +75,7 @@ export function createAuthenticationRouter(
       deps.passwordHasher,
       deps.tokenGenerator,
       publicAuthenitcationRepository,
-      publicAuthenticationPresenter,
+      publicAuthenticationPresenter
     );
 
   const publicRequestPasswordResetUsecase =
@@ -84,13 +84,13 @@ export function createAuthenticationRouter(
       deps.passwordHasher,
       deps.tokenGenerator,
       publicAuthenitcationRepository,
-      publicAuthenticationPresenter,
+      publicAuthenticationPresenter
     );
 
   const publicResetPasswordUsecase = new PublicResetPasswordUsecase(
     deps.passwordHasher,
     publicAuthenitcationRepository,
-    publicAuthenticationPresenter,
+    publicAuthenticationPresenter
   );
 
   const publicAuthenticationController = new PublicAuthenticationController(
@@ -100,13 +100,13 @@ export function createAuthenticationRouter(
     publicVerifyEmailUsecase,
     publicResendEmailVerificationUsecase,
     publicRequestPasswordResetUsecase,
-    publicResetPasswordUsecase,
+    publicResetPasswordUsecase
   );
 
   const router = Router();
 
   router.get(
-    '/public/check-auth',
+    '/check-auth',
     checkAuthLimiter,
     deps.isAuthenticated,
     async (req: Request, res: Response, next: NextFunction) => {
@@ -146,11 +146,11 @@ export function createAuthenticationRouter(
         console.log('Router error', error);
         next(error);
       }
-    },
+    }
   );
 
   router.post(
-    '/public/register',
+    '/register',
     registerLimiter,
     async (req: Request, res: Response, next: NextFunction) => {
       type TRegisterClientResponse = {
@@ -163,7 +163,7 @@ export function createAuthenticationRouter(
       try {
         await publicAuthenticationController.handleRegistrationRequest(
           req.body,
-          language,
+          language
         );
 
         const response = publicAuthenticationPresenter.getRegistrationResult();
@@ -193,11 +193,11 @@ export function createAuthenticationRouter(
       } catch (error) {
         next(error);
       }
-    },
+    }
   );
 
   router.post(
-    '/public/login',
+    '/login',
     loginLimiter,
     async (req: Request, res: Response, next: NextFunction) => {
       type TLoginClientResponse = {
@@ -211,7 +211,7 @@ export function createAuthenticationRouter(
       try {
         await publicAuthenticationController.handleLoginRequest(
           req.body,
-          language,
+          language
         );
 
         const response = publicAuthenticationPresenter.getLoginResult();
@@ -259,11 +259,11 @@ export function createAuthenticationRouter(
         console.log('Router error', error);
         next(error);
       }
-    },
+    }
   );
 
   router.post(
-    '/public/logout',
+    '/logout',
     logoutLimiter,
     deps.isAuthenticated,
     async (req: Request, res: Response, next: NextFunction) => {
@@ -300,11 +300,11 @@ export function createAuthenticationRouter(
         console.log('Router error', error);
         next(error);
       }
-    },
+    }
   );
 
   router.post(
-    '/public/verify-email',
+    '/verify-email',
     verifyEmailLimiter,
     async (req: Request, res: Response, next: NextFunction) => {
       type TVerifyEmailClientResponse = {
@@ -346,11 +346,11 @@ export function createAuthenticationRouter(
       } catch (error) {
         next(error);
       }
-    },
+    }
   );
 
   router.post(
-    '/public/resend-email-verification',
+    '/resend-email-verification',
     resendEmailLimiter,
     async (req: Request, res: Response, next: NextFunction) => {
       type TResendEmailVerificationClientResponse = {
@@ -363,7 +363,7 @@ export function createAuthenticationRouter(
       try {
         await publicAuthenticationController.handleResendEmailVerificationRequest(
           req.body,
-          language,
+          language
         );
 
         const response =
@@ -395,11 +395,11 @@ export function createAuthenticationRouter(
         console.log('Router error', error);
         next(error);
       }
-    },
+    }
   );
 
   router.post(
-    '/public/request-password-reset',
+    '/request-password-reset',
     requestPasswordLimiter,
     async (req: Request, res: Response, next: NextFunction) => {
       type TRequestPasswordResetClientResponse = {
@@ -412,7 +412,7 @@ export function createAuthenticationRouter(
       try {
         await publicAuthenticationController.handleRequestPasswordResetRequest(
           req.body,
-          language,
+          language
         );
 
         const response =
@@ -444,11 +444,11 @@ export function createAuthenticationRouter(
         console.log('Router error', error);
         next(error);
       }
-    },
+    }
   );
 
   router.post(
-    '/public/reset-password',
+    '/reset-password',
     resetPasswordLimiter,
     async (req: Request, res: Response, next: NextFunction) => {
       type TResetPasswordClientResponse = {
@@ -493,7 +493,7 @@ export function createAuthenticationRouter(
         console.log('Router error', error);
         next(error);
       }
-    },
+    }
   );
 
   return router;
