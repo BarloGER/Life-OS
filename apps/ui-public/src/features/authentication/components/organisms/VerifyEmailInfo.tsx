@@ -23,7 +23,10 @@ export const VerifyEmailInfo: React.FC<VerifyEmailInfoProps> = (props) => {
       {isLoading ? <h1>Bitte Warten</h1> : null}
 
       <p>{t('authentication.verifyEmail.text.resendVerificationInfoText')}</p>
-      <Link className="verify-email-info__link" to="/resend-email-verification">
+      <Link
+        className="verify-email-info__link"
+        to="/authentication/resend-email-verification"
+      >
         {t('authentication.verifyEmail.labels.resendVerificationLink')}
       </Link>
     </div>

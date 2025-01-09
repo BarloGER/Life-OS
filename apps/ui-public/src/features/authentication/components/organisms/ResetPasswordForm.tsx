@@ -55,7 +55,7 @@ export const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
       {errorMessage && <ErrorMessage message={errorMessage} />}
       {successMessage && <SuccessMessage message={successMessage} />}
 
-      <Link className="login__link" to="/request-password-reset">
+      <Link className="login__link" to="/authentication/request-password-reset">
         {t('authentication.resetPassword.labels.requestPasswordResetLink')}
       </Link>
 
