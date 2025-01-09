@@ -3,7 +3,6 @@ export class Username {
   private readonly username: string;
 
   constructor(username: string) {
-    // Erlaubt: username ist null
     if (username === '') {
       this.username = null;
       return;
