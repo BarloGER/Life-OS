@@ -2,7 +2,11 @@
   "name": "@life-os/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "ui-public:dev": "npx dotenvx run --env-file=apps/ui-public/.env.development.encrypted -- npx nx serve ui-public",
+    "ui-public:prod": "npx dotenvx run --env-file=apps/ui-public/.env.production.encrypted -- npx nx preview ui-public",
+    "ui-public:build": "npx dotenvx run --env-file=apps/ui-public/.env.production.encrypted -- npx nx build ui-public"
+  },
   "private": true,
   "dependencies": {
     "@dotenvx/dotenvx": "^1.32.0",
