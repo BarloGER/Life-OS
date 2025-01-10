@@ -12,6 +12,7 @@ node_modules
 # Ignore all files that start with "env" except those ending with ".encrypted"
 .env*
 !*.encrypted
+app.yaml
 
 # Dev cerificates
 certs

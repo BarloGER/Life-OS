@@ -5,6 +5,9 @@ import { FPSCounter } from './shared/utils/FPSCounter';
 import { AuthProvider, DesignProvider } from '@shared/context/index';
 import '@shared/configs/i18Config';
 import { PasswordManagerProvider } from '@features/password-manager/context/PasswordManagerContext';
+import { validateEnvs } from '@shared/configs/validateEnvs';
+
+validateEnvs();
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
