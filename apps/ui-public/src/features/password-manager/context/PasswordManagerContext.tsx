@@ -1,16 +1,10 @@
-import React, {
-  createContext,
-  useState,
-  useEffect,
-  useCallback,
-  ReactNode,
-} from 'react';
+import React, { createContext, useState, ReactNode } from 'react';
 import {
   CryptoService,
   ICryptoService,
 } from '@features/password-manager/services/index';
 
-import { Account, Vault } from '../entities';
+import { Account } from '../entities';
 
 type TVaultData = {
   secret: string;
@@ -46,13 +40,6 @@ export const PasswordManagerContext = createContext<TPasswordManagerContext>(
   {} as TPasswordManagerContext
 );
 
-type GetVaultResponse = {
-  success: boolean;
-  errorCode?: string;
-  message?: string;
-  vault?: Vault;
-};
-
 type Props = {
   children: ReactNode;
 };
@@ -65,55 +52,6 @@ export const PasswordManagerProvider: React.FC<Props> = ({ children }) => {
   const [vaultData, setVaultData] = useState<TVaultData | null>(null);
   const [isVaultLoading, setIsVaultLoading] = useState(false);
   const [accountList, setAccountList] = useState<Account[]>([]);
-
-  async function getVaultRequest(): Promise<GetVaultResponse> {
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/password-manager/public/get-vault`,
-        {
-          method: 'GET',
-          credentials: 'include',
-        }
-      );
-
-      return (await response.json()) as GetVaultResponse;
-    } catch (error) {
-      console.error('Get vault request failed:', error);
-      return {
-        success: false,
-        message: 'Failed to fetch',
-      };
-    }
-  }
-
-  const getVault = useCallback(async () => {
-    setIsVaultLoading(true);
-
-    const response = await getVaultRequest();
-    console.log(response);
-
-    if (!response.success && response.vault) {
-      setVaultData(null);
-      setHasVault(false);
-      setIsVaultLoading(false);
-      return;
-    }
-
-    if (!response.success) {
-      setVaultData(null);
-      setHasVault(false);
-      setIsVaultLoading(false);
-      return;
-    }
-
-    setVaultData(response.vault ?? null);
-    setHasVault(true);
-    setIsVaultLoading(false);
-  }, []);
-
-  useEffect(() => {
-    getVault();
-  }, [getVault]);
 
   const value: TPasswordManagerContext = {
     masterPassword,
