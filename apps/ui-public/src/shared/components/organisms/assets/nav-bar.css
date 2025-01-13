@@ -20,7 +20,7 @@
 
 .nav-bar__brand h3 {
   margin: 0;
-  font-size: var(--font-xl);
+  font-size: var(--font-lg);
 }
 
 .nav-bar__hamburger {
